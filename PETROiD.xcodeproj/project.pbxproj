@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B8A5F6B58B6513599EC23E6 /* BattleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710C5157B7F621A4F6E4AD7 /* BattleView.swift */; };
+		22B82D0BCA66416DD23444D1 /* NFCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875427EF62F09549017A02E1 /* NFCService.swift */; };
+		462A53DAA137F35D3BF6509C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D595686D2F79D5CCED88D0C1 /* DetailView.swift */; };
+		48D3E445A177257DA5A9C1A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DBF3DF92F2488A43E480E7 /* ContentView.swift */; };
+		77781C5A71F2F79CE70F0676 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7A1744B469B4C71F16300 /* HomeView.swift */; };
+		808C964741314A8516853D4B /* VisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7583C7A22E872E0DD4C497E0 /* VisionService.swift */; };
+		AAEFA4257A92F83FD543D691 /* PETROiDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7E6E6F8541897E464AAFC /* PETROiDApp.swift */; };
+		AFB1ACF0C0095E628C9279A8 /* WikiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE7CFC2F79E456F7AD44D17 /* WikiService.swift */; };
+		B8A645F25DCF97EC534675BD /* RockPCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2BB4FDFE1C5290DB913A37 /* RockPCView.swift */; };
+		CEDAF2E49D438C7EE44C7D69 /* Rock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245CA123592718CBE000B05 /* Rock.swift */; };
+		E38D7B3C057534609D53C929 /* RockStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9939D2DC653830A75F59E1FF /* RockStore.swift */; };
+		E6B67AA2C8F490234AF3BA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D69D929CE2A35C1E982BA29 /* Assets.xcassets */; };
+		ECB4625DE9E688348A33FFF0 /* ScanResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264DE8CFE082FCDD4B50EE1 /* ScanResultView.swift */; };
+		F8F95A79CB5BFBF60D126877 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C2902FE9EFC3B8AD88788 /* Components.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D69D929CE2A35C1E982BA29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4BAE6581A834EA9A21DEFF2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7583C7A22E872E0DD4C497E0 /* VisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionService.swift; sourceTree = "<group>"; };
+		7C45BB9672ED647A83BA83E8 /* PETROiD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PETROiD.entitlements; sourceTree = "<group>"; };
+		7E1799AAACFB568EA4A9775D /* PETROiD.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PETROiD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		875427EF62F09549017A02E1 /* NFCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCService.swift; sourceTree = "<group>"; };
+		9245CA123592718CBE000B05 /* Rock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rock.swift; sourceTree = "<group>"; };
+		9939D2DC653830A75F59E1FF /* RockStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockStore.swift; sourceTree = "<group>"; };
+		9BE7CFC2F79E456F7AD44D17 /* WikiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiService.swift; sourceTree = "<group>"; };
+		9CC7E6E6F8541897E464AAFC /* PETROiDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PETROiDApp.swift; sourceTree = "<group>"; };
+		A710C5157B7F621A4F6E4AD7 /* BattleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleView.swift; sourceTree = "<group>"; };
+		A7DBF3DF92F2488A43E480E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D595686D2F79D5CCED88D0C1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		DA6C2902FE9EFC3B8AD88788 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		E9F7A1744B469B4C71F16300 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ED2BB4FDFE1C5290DB913A37 /* RockPCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPCView.swift; sourceTree = "<group>"; };
+		F264DE8CFE082FCDD4B50EE1 /* ScanResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0345C5C10E872F51DA762C4C = {
+			isa = PBXGroup;
+			children = (
+				96239DA09E7CC114D85E86DF /* PETROiD */,
+				1B50A010B6E7EA94FC6EEF95 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		12EBB7ED6096DB1387D2E936 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				875427EF62F09549017A02E1 /* NFCService.swift */,
+				7583C7A22E872E0DD4C497E0 /* VisionService.swift */,
+				9BE7CFC2F79E456F7AD44D17 /* WikiService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1B50A010B6E7EA94FC6EEF95 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E1799AAACFB568EA4A9775D /* PETROiD.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3907CC99CE28CA72A33FE56B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9245CA123592718CBE000B05 /* Rock.swift */,
+				9939D2DC653830A75F59E1FF /* RockStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		59EBED8A10036C5DF40426C8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A7DBF3DF92F2488A43E480E7 /* ContentView.swift */,
+				9CC7E6E6F8541897E464AAFC /* PETROiDApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		908CD3BD1FCB5C86E2DCE03F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A710C5157B7F621A4F6E4AD7 /* BattleView.swift */,
+				DA6C2902FE9EFC3B8AD88788 /* Components.swift */,
+				D595686D2F79D5CCED88D0C1 /* DetailView.swift */,
+				E9F7A1744B469B4C71F16300 /* HomeView.swift */,
+				ED2BB4FDFE1C5290DB913A37 /* RockPCView.swift */,
+				F264DE8CFE082FCDD4B50EE1 /* ScanResultView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		96239DA09E7CC114D85E86DF /* PETROiD */ = {
+			isa = PBXGroup;
+			children = (
+				0D69D929CE2A35C1E982BA29 /* Assets.xcassets */,
+				4BAE6581A834EA9A21DEFF2D /* Info.plist */,
+				7C45BB9672ED647A83BA83E8 /* PETROiD.entitlements */,
+				59EBED8A10036C5DF40426C8 /* App */,
+				3907CC99CE28CA72A33FE56B /* Models */,
+				908CD3BD1FCB5C86E2DCE03F /* Screens */,
+				12EBB7ED6096DB1387D2E936 /* Services */,
+			);
+			path = PETROiD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		26E3CB37DBDBA40B8DE3008A /* PETROiD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 311B3FE666B4F63F8749B315 /* Build configuration list for PBXNativeTarget "PETROiD" */;
+			buildPhases = (
+				3EC05DAA746F06A3A453A156 /* Sources */,
+				B4D6FFC8BA018587617ACA77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PETROiD;
+			packageProductDependencies = (
+			);
+			productName = PETROiD;
+			productReference = 7E1799AAACFB568EA4A9775D /* PETROiD.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		732A80D961CF19A8603FA35B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					26E3CB37DBDBA40B8DE3008A = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 28607E69DA0601DC262C29D2 /* Build configuration list for PBXProject "PETROiD" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0345C5C10E872F51DA762C4C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1B50A010B6E7EA94FC6EEF95 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				26E3CB37DBDBA40B8DE3008A /* PETROiD */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B4D6FFC8BA018587617ACA77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6B67AA2C8F490234AF3BA9C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EC05DAA746F06A3A453A156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B8A5F6B58B6513599EC23E6 /* BattleView.swift in Sources */,
+				F8F95A79CB5BFBF60D126877 /* Components.swift in Sources */,
+				48D3E445A177257DA5A9C1A6 /* ContentView.swift in Sources */,
+				462A53DAA137F35D3BF6509C /* DetailView.swift in Sources */,
+				77781C5A71F2F79CE70F0676 /* HomeView.swift in Sources */,
+				22B82D0BCA66416DD23444D1 /* NFCService.swift in Sources */,
+				AAEFA4257A92F83FD543D691 /* PETROiDApp.swift in Sources */,
+				CEDAF2E49D438C7EE44C7D69 /* Rock.swift in Sources */,
+				B8A645F25DCF97EC534675BD /* RockPCView.swift in Sources */,
+				E38D7B3C057534609D53C929 /* RockStore.swift in Sources */,
+				ECB4625DE9E688348A33FFF0 /* ScanResultView.swift in Sources */,
+				808C964741314A8516853D4B /* VisionService.swift in Sources */,
+				AFB1ACF0C0095E628C9279A8 /* WikiService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		41D2EDF720FC65F8D8CA5BAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		54CB50FE25F16A230036BE34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PETROiD/PETROiD.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = PETROiD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.petrovicatos.PETROiD;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		954D36B1ECCEFD63A4E8D66C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		DF34A0CC87FD91E085615772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PETROiD/PETROiD.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = PETROiD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.petrovicatos.PETROiD;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28607E69DA0601DC262C29D2 /* Build configuration list for PBXProject "PETROiD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				954D36B1ECCEFD63A4E8D66C /* Debug */,
+				41D2EDF720FC65F8D8CA5BAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		311B3FE666B4F63F8749B315 /* Build configuration list for PBXNativeTarget "PETROiD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF34A0CC87FD91E085615772 /* Debug */,
+				54CB50FE25F16A230036BE34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 732A80D961CF19A8603FA35B /* Project object */;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>PETROiD</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>NFCReaderUsageDescription</key>
+	<string>PETROiD uses NFC to battle nearby trainers.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>PETROiD uses the camera to photograph and identify rocks.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>PETROiD pins where you found each rock.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>PETROiD reads photos to identify rocks.</string>
+	<key>UILaunchScreen</key>
+	<dict/>
+</dict>
+</plist>
