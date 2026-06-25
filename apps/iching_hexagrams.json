@@ -1,0 +1,642 @@
+[
+  {
+    "id": 1,
+    "number": 1,
+    "chineseName": "乾",
+    "englishName": "The Creative",
+    "binary": "111111",
+    "description": "Pure yang energy, creative force, heaven",
+    "changingLines": ["Hidden dragon, do not act", "Dragon appearing in the field", "The superior man is active all day", "Wavering flight over the depths", "Flying dragon in the heavens", "Arrogant dragon will have cause to repent"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_1"
+  },
+  {
+    "id": 2,
+    "number": 2,
+    "chineseName": "坤",
+    "englishName": "The Receptive",
+    "binary": "000000",
+    "description": "Pure yin energy, receptive force, earth",
+    "changingLines": ["Treading on hoarfrost, solid ice is not far off", "Straight, square, great; without purpose, yet nothing remains unfurthered", "Hidden lines; one is able to remain persevering", "A tied-up sack; no blame, no praise", "Yellow lower garment brings supreme good fortune", "Dragons fight in the meadow; their blood is black and yellow"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_2"
+  },
+  {
+    "id": 3,
+    "number": 3,
+    "chineseName": "屯",
+    "englishName": "Difficulty at the Beginning",
+    "binary": "010001",
+    "description": "Initial difficulties, chaos before order, sprouting",
+    "changingLines": ["Hesitation and hindrance; it furthers one to remain persevering", "Difficulties pile up; horse and wagon part", "Whoever hunts deer without the forester only loses his way in the forest", "Horse and wagon part; strive for union", "Difficulties in blessing; a little perseverance brings good fortune", "Horse and wagon part; bloody tears flow"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_3"
+  },
+  {
+    "id": 4,
+    "number": 4,
+    "chineseName": "蒙",
+    "englishName": "Youthful Folly",
+    "binary": "100010",
+    "description": "Inexperience, the young fool, educating the immature",
+    "changingLines": ["To make a fool develop, it furthers one to apply discipline", "To bear with fools in kindliness brings good fortune", "Take not a maiden who sees a man of bronze and loses possession of herself", "Entangled folly brings humiliation", "Childlike folly brings good fortune", "In punishing folly, it does not further one to commit transgressions"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_4"
+  },
+  {
+    "id": 5,
+    "number": 5,
+    "chineseName": "需",
+    "englishName": "Waiting",
+    "binary": "010111",
+    "description": "Nourishment, patient waiting, calculated inaction",
+    "changingLines": ["Waiting in the meadow; it furthers one to abide in what endures", "Waiting on the sand; there is some gossip", "Waiting in the mud brings about the arrival of the enemy", "Waiting in blood; get out of the pit", "Waiting at meat and drink; perseverance brings good fortune", "One falls into the pit; three uninvited guests arrive"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_5"
+  },
+  {
+    "id": 6,
+    "number": 6,
+    "chineseName": "訟",
+    "englishName": "Conflict",
+    "binary": "111010",
+    "description": "Dispute, contention, litigation",
+    "changingLines": ["If one does not perpetuate the affair, there is a little gossip", "One cannot engage in conflict; one returns home, gives way", "To nourish oneself on ancient virtue induces perseverance", "One cannot engage in conflict; turning back, one submits to fate", "To contend before him brings supreme good fortune", "Even if by chance a leather belt is bestowed on one, by the end of a morning it will have been snatched away three times"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_6"
+  },
+  {
+    "id": 7,
+    "number": 7,
+    "chineseName": "師",
+    "englishName": "The Army",
+    "binary": "000010",
+    "description": "Collective force, discipline, leadership of the multitude",
+    "changingLines": ["An army must set forth in proper order", "In the midst of the army; good fortune, no blame", "Perchance the army carries corpses in the wagon; misfortune", "The army retreats; no blame", "There is game in the field; it furthers one to catch it", "The great prince issues commands, founds states, vests families with fiefs"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_7"
+  },
+  {
+    "id": 8,
+    "number": 8,
+    "chineseName": "比",
+    "englishName": "Holding Together",
+    "binary": "010000",
+    "description": "Union, alliance, seeking harmony",
+    "changingLines": ["Hold to him in truth and loyalty; this is without blame", "Hold to him inwardly; perseverance brings good fortune", "You hold together with the wrong people", "Hold to him outwardly also; perseverance brings good fortune", "Manifestation of holding together; the king uses beaters on three sides only", "He finds no head for holding together; misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_8"
+  },
+  {
+    "id": 9,
+    "number": 9,
+    "chineseName": "小畜",
+    "englishName": "Small Taming",
+    "binary": "110111",
+    "description": "Gentle restraint, minor accumulation, the power of the small",
+    "changingLines": ["Return to the way; how could there be blame in this?", "He allows himself to be drawn into returning; good fortune", "The wagon is stripped of its spokes; man and wife roll their eyes", "If you are sincere, blood vanishes and fear gives way", "If you are sincere and loyally attached, you are rich in your neighbor", "The rain comes, there is rest; honor is heaped up through perseverance"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_9"
+  },
+  {
+    "id": 10,
+    "number": 10,
+    "chineseName": "履",
+    "englishName": "Treading",
+    "binary": "111011",
+    "description": "Conduct, treading carefully, walking on the tiger's tail",
+    "changingLines": ["Simple conduct; progress without blame", "Treading a smooth, level course; perseverance of a dark man brings good fortune", "A one-eyed man is able to see, a lame man is able to tread", "He treads on the tail of the tiger; caution and circumspection lead ultimately to good fortune", "Resolute conduct; perseverance with awareness of danger", "Look to your conduct and weigh the favorable signs; supreme good fortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_10"
+  },
+  {
+    "id": 11,
+    "number": 11,
+    "chineseName": "泰",
+    "englishName": "Peace",
+    "binary": "000111",
+    "description": "Harmony, prosperity, great pervading",
+    "changingLines": ["When ribbon grass is pulled up, the sod comes with it", "Bearing with the uncultured in gentleness, fording the river with resolution", "No plain not followed by a slope, no going not followed by a return", "He flutters down, not boasting of his wealth, together with his neighbor", "The sovereign I gives his daughter in marriage; this brings blessing and supreme good fortune", "The wall falls back into the moat; use no army now"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_11"
+  },
+  {
+    "id": 12,
+    "number": 12,
+    "chineseName": "否",
+    "englishName": "Standstill",
+    "binary": "111000",
+    "description": "Stagnation, obstruction, the evil time",
+    "changingLines": ["When ribbon grass is pulled up, the sod comes with it", "They bear and endure; this means good fortune for inferior people", "They bear shame", "He who acts at the command of the highest remains without blame", "Standstill is giving way; good fortune for the great man", "The standstill comes to an end; first standstill, then good fortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_12"
+  },
+  {
+    "id": 13,
+    "number": 13,
+    "chineseName": "同人",
+    "englishName": "Fellowship",
+    "binary": "111101",
+    "description": "Community, fellowship with others, companionship",
+    "changingLines": ["Fellowship with men at the gate; no blame", "Fellowship with men in the clan; humiliation", "He hides weapons in the thicket; he climbs the high hill", "He climbs up on his wall; he cannot attack", "Men bound in fellowship first weep and lament, but afterward they laugh", "Fellowship with men in the meadow; no remorse"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_13"
+  },
+  {
+    "id": 14,
+    "number": 14,
+    "chineseName": "大有",
+    "englishName": "Great Possession",
+    "binary": "101111",
+    "description": "Abundance, great accumulation, sovereignty",
+    "changingLines": ["No relationship with what is harmful; there is no blame in this", "A big wagon for loading; one may undertake something", "A prince offers it to the Son of Heaven; a petty man cannot do this", "He makes a difference between himself and his neighbor; no blame", "He whose truth is accessible, yet dignified, has good fortune", "He is blessed by heaven; good fortune, nothing that does not further"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_14"
+  },
+  {
+    "id": 15,
+    "number": 15,
+    "chineseName": "謙",
+    "englishName": "Modesty",
+    "binary": "000100",
+    "description": "Humility, moderation, the modest",
+    "changingLines": ["A superior man modest about his modesty may cross the great water", "Modesty that comes to expression; perseverance brings good fortune", "A superior man of modesty and merit carries things to conclusion", "Nothing that would not further; modesty in movement", "No boasting of wealth before one's neighbor; it is favorable to attack with force", "Modesty that comes to expression; it is favorable to set armies marching"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_15"
+  },
+  {
+    "id": 16,
+    "number": 16,
+    "chineseName": "豫",
+    "englishName": "Enthusiasm",
+    "binary": "001000",
+    "description": "Harmony, delight, providing for",
+    "changingLines": ["Enthusiasm that expresses itself brings misfortune", "Firm as a rock; not a whole day; perseverance brings good fortune", "Enthusiasm that looks upward creates remorse; hesitation brings remorse", "The source of enthusiasm; he achieves great things", "Persistently ill, and still does not die", "Deluded enthusiasm; but if after completion one changes, there is no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_16"
+  },
+  {
+    "id": 17,
+    "number": 17,
+    "chineseName": "隨",
+    "englishName": "Following",
+    "binary": "011001",
+    "description": "Adaptation, compliance, going with the flow",
+    "changingLines": ["The standard is changing; perseverance brings good fortune", "If one clings to the little boy, one loses the strong man", "If one clings to the strong man, one loses the little boy", "Following creates success; perseverance brings misfortune", "Sincere in the good; good fortune", "He meets with firm allegiance and is still further bound"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_17"
+  },
+  {
+    "id": 18,
+    "number": 18,
+    "chineseName": "蠱",
+    "englishName": "Work on the Decayed",
+    "binary": "100110",
+    "description": "Correcting decay, renovation, fixing what has been spoiled",
+    "changingLines": ["Setting right what has been spoiled by the father", "Setting right what has been spoiled by the mother", "Setting right what has been spoiled by the father", "Tolerating what has been spoiled by the father", "Setting right what has been spoiled by the father", "He does not serve kings and princes; he sets himself higher goals"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_18"
+  },
+  {
+    "id": 19,
+    "number": 19,
+    "chineseName": "臨",
+    "englishName": "Approach",
+    "binary": "000011",
+    "description": "Advance, drawing near, becoming great",
+    "changingLines": ["Joint approach; perseverance brings good fortune", "Joint approach; good fortune, everything furthers", "Comfortable approach; nothing that would further", "Complete approach; no blame", "Wise approach; this is right for a great prince", "Greathearted approach; good fortune, no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_19"
+  },
+  {
+    "id": 20,
+    "number": 20,
+    "chineseName": "觀",
+    "englishName": "Contemplation",
+    "binary": "110000",
+    "description": "Observation, looking down, being an example",
+    "changingLines": ["Boylike contemplation; for an inferior man, no blame", "Contemplation through the crack of the door; furthering for the perseverance of a woman", "Contemplation of my life decides the choice between advance and retreat", "Contemplation of the light of the kingdom; it furthers one to be the guest of a king", "Contemplation of my life; the superior man is without blame", "Contemplation of his life; the superior man is without blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_20"
+  },
+  {
+    "id": 21,
+    "number": 21,
+    "chineseName": "噬嗑",
+    "englishName": "Biting Through",
+    "binary": "101001",
+    "description": "Justice, removing obstacles, decisive action",
+    "changingLines": ["His feet are fastened in the stocks, so that his toes disappear", "Bites through tender meat, so that his nose disappears", "Bites on old dried meat and strikes on something poisonous", "Bites on dried gristly meat; receives metal arrows", "Bites on dried lean meat; receives yellow gold", "His neck is fastened in the wooden cangue, so that his ears disappear"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_21"
+  },
+  {
+    "id": 22,
+    "number": 22,
+    "chineseName": "賁",
+    "englishName": "Grace",
+    "binary": "100101",
+    "description": "Beauty, elegance, adorning",
+    "changingLines": ["He lends grace to his toes, leaves the carriage, and walks", "Lends grace to the beard on his chin", "Graceful and moist; constant perseverance brings good fortune", "Grace or simplicity? A white horse comes as if on wings", "Grace in hills and gardens; the roll of silk is meager and small", "Simple grace; no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_22"
+  },
+  {
+    "id": 23,
+    "number": 23,
+    "chineseName": "剝",
+    "englishName": "Splitting Apart",
+    "binary": "100000",
+    "description": "Disintegration, stripping away, decline",
+    "changingLines": ["The leg of the bed is split; those who persevere are destroyed", "The bed is split at the edge; those who persevere are destroyed", "He splits with them; no blame", "The bed is split up to the skin; misfortune", "A shoal of fishes; favor comes through the court ladies", "There is a large fruit still uneaten; the superior man obtains a carriage"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_23"
+  },
+  {
+    "id": 24,
+    "number": 24,
+    "chineseName": "復",
+    "englishName": "Return",
+    "binary": "000001",
+    "description": "The turning point, renewal, coming back",
+    "changingLines": ["Return from a short distance; no need for remorse", "Quiet return; good fortune", "Repeated return; danger, no blame", "Walking in the midst of others, one returns alone", "Noblehearted return; no remorse", "Missing the return; misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_24"
+  },
+  {
+    "id": 25,
+    "number": 25,
+    "chineseName": "無妄",
+    "englishName": "Innocence",
+    "binary": "111001",
+    "description": "Unexpected, without falsehood, the natural",
+    "changingLines": ["Innocent behavior brings good fortune", "If one does not count on the harvest while plowing", "Undeserved misfortune; the cow that was tethered by someone", "He who can be persevering remains without blame", "Use no medicine in an illness incurred through no fault of your own", "Innocent action brings misfortune; nothing furthers"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_25"
+  },
+  {
+    "id": 26,
+    "number": 26,
+    "chineseName": "大畜",
+    "englishName": "Great Taming",
+    "binary": "100111",
+    "description": "Great accumulation, restraining force, potential stored",
+    "changingLines": ["Danger is at hand; it furthers one to desist", "The wagon is stripped of its undercarriage", "A good horse that follows others; awareness of danger", "The headboard of a young bull; great good fortune", "The tusk of a gelded boar; good fortune", "One attains the way of heaven; success"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_26"
+  },
+  {
+    "id": 27,
+    "number": 27,
+    "chineseName": "頤",
+    "englishName": "Nourishment",
+    "binary": "100001",
+    "description": "Providing nourishment, seeking sustenance, the corners of the mouth",
+    "changingLines": ["You let your magic tortoise go and look at me with the corners of your mouth drooping", "Turning to the summit for nourishment, deviating from the path", "Turning away from nourishment; perseverance brings misfortune", "Turning to the summit for provision of nourishment brings good fortune", "Turning away from the path; to remain persevering brings good fortune", "The source of nourishment; awareness of danger brings good fortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_27"
+  },
+  {
+    "id": 28,
+    "number": 28,
+    "chineseName": "大過",
+    "englishName": "Great Exceeding",
+    "binary": "011110",
+    "description": "Excess, preponderance of the great, critical mass",
+    "changingLines": ["To spread white rushes underneath; no blame", "A dry poplar sprouts at the root; an older man takes a young wife", "The ridgepole sags to the breaking point; misfortune", "The ridgepole is braced; good fortune", "A withered poplar puts forth flowers; an older woman takes a husband", "One must go through the water; it goes over one's head"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_28"
+  },
+  {
+    "id": 29,
+    "number": 29,
+    "chineseName": "坎",
+    "englishName": "The Abysmal",
+    "binary": "010010",
+    "description": "Water, danger, repeated entrapment",
+    "changingLines": ["Repetition of the abyss; in the abyss one falls into a pit", "The abyss is dangerous; one should strive to attain small things only", "Forward and backward, abyss on abyss; in danger like this, pause at first", "A jug of wine, a bowl of rice with it; earthen vessels", "The abyss is not filled to overflowing; it is filled only to the rim", "Bound with cords and ropes, shut in between thorn-hedged prison walls"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_29"
+  },
+  {
+    "id": 30,
+    "number": 30,
+    "chineseName": "離",
+    "englishName": "The Clinging",
+    "binary": "101101",
+    "description": "Fire, radiance, attachment and clarity",
+    "changingLines": ["Footprints run crisscross; if one is seriously intent, no blame", "Yellow light; supreme good fortune", "In the light of the setting sun, men either beat the pot and sing", "Its coming is sudden; it flames up, dies down, is thrown away", "In floods of tears, sighing and lamenting; good fortune", "The king uses him to march forth and chastise; then it is best to kill the leaders"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_30"
+  },
+  {
+    "id": 31,
+    "number": 31,
+    "chineseName": "咸",
+    "englishName": "Influence",
+    "binary": "011100",
+    "description": "Attraction, stimulation, mutual influence",
+    "changingLines": ["The influence shows itself in the big toe", "The influence shows itself in the calves of the legs; misfortune", "The influence shows itself in the thighs and holds to that which follows it", "Perseverance brings good fortune; remorse disappears", "The influence shows itself in the back of the neck; no remorse", "The influence shows itself in the jaws, cheeks, and tongue"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_31"
+  },
+  {
+    "id": 32,
+    "number": 32,
+    "chineseName": "恆",
+    "englishName": "Duration",
+    "binary": "001110",
+    "description": "Constancy, perseverance, enduring",
+    "changingLines": ["Seeking duration too hastily brings misfortune persistently", "Remorse disappears", "He who does not give duration to his character meets with disgrace", "No game in the field", "Giving duration to one's character through perseverance", "Restlessness as an enduring condition brings misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_32"
+  },
+  {
+    "id": 33,
+    "number": 33,
+    "chineseName": "遯",
+    "englishName": "Retreat",
+    "binary": "111100",
+    "description": "Withdrawal, retiring, yielding",
+    "changingLines": ["At the tail in retreat; this is dangerous", "He holds him fast with yellow oxhide; no one can tear him loose", "A halted retreat is nerve-wracking and dangerous", "Voluntary retreat brings good fortune to the superior man", "Friendly retreat; perseverance brings good fortune", "Cheerful retreat; everything serves to further"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_33"
+  },
+  {
+    "id": 34,
+    "number": 34,
+    "chineseName": "大壯",
+    "englishName": "Great Power",
+    "binary": "001111",
+    "description": "Vigor, strength, the power of the great",
+    "changingLines": ["Power in the toes; continuing brings misfortune", "Perseverance brings good fortune", "The inferior man works through power; the superior man does not act thus", "Perseverance brings good fortune; remorse disappears", "Loses the goat with ease; no remorse", "A goat butts against a hedge and gets its horns entangled"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_34"
+  },
+  {
+    "id": 35,
+    "number": 35,
+    "chineseName": "晉",
+    "englishName": "Progress",
+    "binary": "101000",
+    "description": "Advancement, prospering, moving forward",
+    "changingLines": ["Progressing, but turned back; perseverance brings good fortune", "Progressing, but in sorrow; perseverance brings good fortune", "All are in accord; remorse disappears", "Progress like a hamster; perseverance brings danger", "Remorse disappears; take not gain and loss to heart", "Making progress with the horns is permissible only for the purpose of punishing one's own city"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_35"
+  },
+  {
+    "id": 36,
+    "number": 36,
+    "chineseName": "明夷",
+    "englishName": "Darkening of the Light",
+    "binary": "000101",
+    "description": "Censorship, injury of the bright, eclipse",
+    "changingLines": ["Darkening of the light during flight; he lowers his wings", "Darkening of the light injures him in the left thigh", "Darkening of the light during the hunt in the south", "He penetrates the left side of the belly", "Darkening of the light as with Prince Chi; perseverance furthers", "Not light but darkness; first he climbed up to heaven, then he plunged into the depths of the earth"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_36"
+  },
+  {
+    "id": 37,
+    "number": 37,
+    "chineseName": "家人",
+    "englishName": "The Family",
+    "binary": "110101",
+    "description": "The dwelling, household, the clan",
+    "changingLines": ["Firm seclusion within the family; remorse disappears", "She should not follow her whims; she must attend within to the food", "When tempers flare up in the family, too great severity brings remorse", "She is the treasure of the house; great good fortune", "As a king he approaches his family; fear not", "His work commands respect; in the end good fortune comes"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_37"
+  },
+  {
+    "id": 38,
+    "number": 38,
+    "chineseName": "睽",
+    "englishName": "Opposition",
+    "binary": "101011",
+    "description": "Contradiction, estrangement, disharmony",
+    "changingLines": ["Remorse disappears; if you lose your horse, do not run after it", "One meets his lord in a narrow street; no blame", "One sees the wagon dragged back, the oxen halted", "Isolated through opposition, one meets a like-minded man", "Remorse disappears; the companion bites his way through the wrappings", "Isolated through opposition, one meets a like-minded man with whom one can associate in good faith"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_38"
+  },
+  {
+    "id": 39,
+    "number": 39,
+    "chineseName": "蹇",
+    "englishName": "Obstruction",
+    "binary": "010100",
+    "description": "Difficulty, limping, turning back",
+    "changingLines": ["Going leads to obstructions, coming meets with praise", "The king's servant is beset by obstruction upon obstruction", "Going leads to obstructions; hence he comes back", "Going leads to obstructions, coming leads to union", "In the midst of the greatest obstructions, friends come", "Going leads to obstructions, coming leads to great good fortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_39"
+  },
+  {
+    "id": 40,
+    "number": 40,
+    "chineseName": "解",
+    "englishName": "Deliverance",
+    "binary": "001010",
+    "description": "Liberation, release,解 removing tension",
+    "changingLines": ["Without blame", "One kills three foxes in the field and receives a yellow arrow", "If a man carries a burden on his back and nonetheless rides in a carriage", "Deliver yourself from your great toe; then the companion comes", "If only the superior man can deliver himself, it brings good fortune", "The prince shoots at a hawk on a high wall; he kills it"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_40"
+  },
+  {
+    "id": 41,
+    "number": 41,
+    "chineseName": "損",
+    "englishName": "Decrease",
+    "binary": "100011",
+    "description": "Reduction, loss, sacrifice for gain",
+    "changingLines": ["Going quickly when one's tasks are finished is without blame", "Perseverance furthers; to undertake something brings misfortune", "When three people journey together, their number decreases by one", "If a man decreases his faults, it makes the other hasten to come and rejoice", "Someone does indeed increase him; ten pairs of tortoises cannot oppose it", "If one is increased without depriving others, there is no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_41"
+  },
+  {
+    "id": 42,
+    "number": 42,
+    "chineseName": "益",
+    "englishName": "Increase",
+    "binary": "110001",
+    "description": "Gain, augmentation, benefit",
+    "changingLines": ["It furthers one to accomplish great deeds; supreme good fortune, no blame", "Someone does indeed increase him; ten pairs of tortoises cannot oppose it", "One is enriched through unfortunate events; no blame", "If you walk in the middle and report to the prince, he will follow", "If in truth you have a kind heart, ask not; supreme good fortune", "He brings increase to no one; indeed, someone even strikes him"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_42"
+  },
+  {
+    "id": 43,
+    "number": 43,
+    "chineseName": "夬",
+    "englishName": "Breakthrough",
+    "binary": "011111",
+    "description": "Resolution, resoluteness, parting",
+    "changingLines": ["Mighty in the forward-striding toes; when one goes and is not equal to the task", "A cry of alarm; arms at evening and at night", "To be powerful in the cheekbones brings misfortune", "There is no skin on his thighs, and walking comes hard", "In dealing with weeds, firm resolution is necessary", "No cry; in the end misfortune comes"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_43"
+  },
+  {
+    "id": 44,
+    "number": 44,
+    "chineseName": "姤",
+    "englishName": "Coming to Meet",
+    "binary": "111110",
+    "description": "Encountering, temptation, the maiden",
+    "changingLines": ["It must be checked with a brake of bronze", "There is a fish in the tank; no blame", "There is no skin on his thighs, and walking comes hard", "No fish in the tank; this leads to misfortune", "A melon covered with willow leaves; hidden lines", "He comes to meet with his horns; humiliation, no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_44"
+  },
+  {
+    "id": 45,
+    "number": 45,
+    "chineseName": "萃",
+    "englishName": "Gathering Together",
+    "binary": "011000",
+    "description": "Assembling, congregation, massing",
+    "changingLines": ["If you are sincere, but not to the end, there will sometimes be confusion", "Letting oneself be drawn brings good fortune and remains blameless", "Gathering together amid sighs; nothing that would further", "Great good fortune; no blame", "If in gathering together one has position, this brings no blame", "Lamenting and sighing, floods of tears; no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_45"
+  },
+  {
+    "id": 46,
+    "number": 46,
+    "chineseName": "升",
+    "englishName": "Pushing Upward",
+    "binary": "000110",
+    "description": "Ascending, rising, growth",
+    "changingLines": ["Pushing upward that meets with confidence brings great good fortune", "If one is sincere, it furthers one to bring even a small offering", "One pushes upward into an empty city", "The king offers him Mount Chi; good fortune, no blame", "Perseverance brings good fortune; one pushes upward by steps", "Pushing upward in darkness; it furthers one to be unremittingly persevering"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_46"
+  },
+  {
+    "id": 47,
+    "number": 47,
+    "chineseName": "困",
+    "englishName": "Oppression",
+    "binary": "011010",
+    "description": "Exhaustion, adversity, confinement",
+    "changingLines": ["One sits oppressed under a bare tree and strays into a gloomy valley", "One is oppressed while at meat and drink; the man with the scarlet knee bands is just coming", "A man permits himself to be oppressed by stone and leans on thorns and thistles", "He comes very quietly, oppressed in a golden carriage", "His nose and feet are cut off; oppression at the hands of the man with the purple knee bands", "He is oppressed by creeping vines; he moves uncertainly and says"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_47"
+  },
+  {
+    "id": 48,
+    "number": 48,
+    "chineseName": "井",
+    "englishName": "The Well",
+    "binary": "010110",
+    "description": "The source, the water well, unchanging resource",
+    "changingLines": ["One does not drink the mud of the well; no animals come to an old well", "At the wellhole one shoots fishes; the jug is broken and leaks", "The well is cleaned, but no one drinks from it", "The well is being lined; no blame", "In the well there is a clear, cold spring from which one can drink", "One draws from the well without hindrance; it is dependable"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_48"
+  },
+  {
+    "id": 49,
+    "number": 49,
+    "chineseName": "革",
+    "englishName": "Revolution",
+    "binary": "011101",
+    "description": "Radical change, molting, transformation",
+    "changingLines": ["Wrapped in the hide of a yellow cow", "When one's own day comes, one may create revolution", "Starting brings misfortune; perseverance brings danger", "Remorse disappears; men believe him", "The great man changes like a tiger; even before he questions the oracle", "The superior man changes like a panther; the inferior man molts in the face"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_49"
+  },
+  {
+    "id": 50,
+    "number": 50,
+    "chineseName": "鼎",
+    "englishName": "The Cauldron",
+    "binary": "101110",
+    "description": "The sacrificial vessel, transformation, nourishment",
+    "changingLines": ["A ting with legs upturned; furthers removal of stagnating stuff", "There is food in the ting; my comrades are envious", "The handle of the ting is altered; one is impeded in his way of life", "The legs of the ting are broken; the prince's meal is spilled", "The ting has yellow handles, golden carrying rings", "The ting has rings of jade; great good fortune, nothing that would not act to further"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_50"
+  },
+  {
+    "id": 51,
+    "number": 51,
+    "chineseName": "震",
+    "englishName": "The Arousing",
+    "binary": "001001",
+    "description": "Shock, thunder, movement and initiative",
+    "changingLines": ["Shock comes—oh, oh! Then follow laughing words—ha, ha!", "Shock comes bringing danger; a hundred thousand times you lose your treasures", "Shock comes and makes one distraught; if shock spurs to action, one remains free of misfortune", "Shock is mired", "Shock goes hither and thither; danger", "Shock brings ruin and terrified gazing around; going ahead brings misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_51"
+  },
+  {
+    "id": 52,
+    "number": 52,
+    "chineseName": "艮",
+    "englishName": "Keeping Still",
+    "binary": "100100",
+    "description": "Stillness, meditation, the mountain",
+    "changingLines": ["Keeping his toes still; no blame", "Keeping his calves still; he cannot rescue him whom he follows", "Keeping his hips still; making his sacrum stiff", "Keeping his trunk still; no blame", "Keeping his jaws still; the words have order", "Noblehearted keeping still; good fortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_52"
+  },
+  {
+    "id": 53,
+    "number": 53,
+    "chineseName": "漸",
+    "englishName": "Development",
+    "binary": "110100",
+    "description": "Gradual progress, advancing step by step",
+    "changingLines": ["The wild goose gradually draws near the shore", "The wild goose gradually draws near the cliff", "The wild goose gradually draws near the plateau", "The wild goose gradually draws near the tree", "The wild goose gradually draws near the summit", "The wild goose gradually draws near the clouds heights"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_53"
+  },
+  {
+    "id": 54,
+    "number": 54,
+    "chineseName": "歸妹",
+    "englishName": "The Marrying Maiden",
+    "binary": "001011",
+    "description": "Subordinate position, improper union, the younger sister",
+    "changingLines": ["The marrying maiden as a concubine; a lame man who is able to tread", "A one-eyed man who is able to see; the perseverance of a solitary man furthers", "The marrying maiden as a slave; she marries as a concubine", "The marrying maiden draws out the allotted time", "The sovereign I gave his daughter in marriage", "The woman holds the basket, but there are no fruits in it"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_54"
+  },
+  {
+    "id": 55,
+    "number": 55,
+    "chineseName": "豐",
+    "englishName": "Abundance",
+    "binary": "001101",
+    "description": "Fullness, prosperity, zenith",
+    "changingLines": ["When a man meets his destined ruler, they can be together ten days", "The curtain is of such fullness that the polestars can be seen at noon", "The underbrush is of such abundance that the small stars can be seen at noon", "The curtain is of such fullness that the polestars can be seen at noon", "Lines are coming, blessing and fame draw near", "His house is in a state of abundance; he screens off his family"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_55"
+  },
+  {
+    "id": 56,
+    "number": 56,
+    "chineseName": "旅",
+    "englishName": "The Wanderer",
+    "binary": "101100",
+    "description": "The stranger, travel, temporary residence",
+    "changingLines": ["If the wanderer busies himself with trivial things, he draws down misfortune upon himself", "The wanderer comes to an inn; he has his property with him", "The wanderer's inn burns down; he loses the steadfastness of his young servant", "The wanderer rests in a shelter; he obtains his property and an ax", "He shoots a pheasant; it drops with the first arrow", "The bird's nest burns up; the wanderer first laughs, then must needs lament and weep"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_56"
+  },
+  {
+    "id": 57,
+    "number": 57,
+    "chineseName": "巽",
+    "englishName": "The Gentle",
+    "binary": "110110",
+    "description": "Wind, penetration, gentle influence",
+    "changingLines": ["In advancing and in retreating, the perseverance of a warrior furthers", "Penetration under the bed; priests and magicians are used in confusing number", "Repeated penetration; humiliation", "Remorse vanishes; during the hunt three kinds of game are caught", "Perseverance brings good fortune; remorse vanishes, nothing that does not further", "Penetration under the bed; he loses his property and his ax"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_57"
+  },
+  {
+    "id": 58,
+    "number": 58,
+    "chineseName": "兌",
+    "englishName": "The Joyous",
+    "binary": "011011",
+    "description": "Joy, the lake, pleasure and satisfaction",
+    "changingLines": ["Contented joyousness; good fortune", "Sincere joyousness; good fortune, remorse disappears", "Coming joyousness; misfortune", "Joyousness that is weighed is not at peace", "Sincerity toward disintegrating influences is dangerous", "Seductive joyousness"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_58"
+  },
+  {
+    "id": 59,
+    "number": 59,
+    "chineseName": "渙",
+    "englishName": "Dispersion",
+    "binary": "110010",
+    "description": "Dissolution, dispersal, scattering",
+    "changingLines": ["He brings help with the strength of a horse; good fortune", "At the dissolution he hurries to that which supports him; remorse disappears", "He dissolves his self; no remorse", "He dissolves his bond with his group; supreme good fortune", "His loud cries are as dissolving as sweat; dissolution!", "He dissolves his blood; departing, keeping at a distance, going out, is without blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_59"
+  },
+  {
+    "id": 60,
+    "number": 60,
+    "chineseName": "節",
+    "englishName": "Limitation",
+    "binary": "010011",
+    "description": "Restraint, regulation,節 節 moderation",
+    "changingLines": ["Not going out of the gate and the courtyard is without blame", "Not going out of the gate and the courtyard brings misfortune", "He who knows no limitation will have cause to lament", "Contented limitation; success", "Sweet limitation brings good fortune; going brings esteem", "Galling limitation; perseverance brings misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_60"
+  },
+  {
+    "id": 61,
+    "number": 61,
+    "chineseName": "中孚",
+    "englishName": "Inner Truth",
+    "binary": "110011",
+    "description": "Sincerity, confidence, the inner truth",
+    "changingLines": ["Being prepared brings good fortune; if there are secret designs, it is disquieting", "A crane calling in the shade; its young answers it", "He finds a comrade; now he beats the drum, now he stops", "The moon nearly at the full; the team horse goes astray", "He possesses truth, which links together; no blame", "Cockcrow penetrating to heaven; perseverance brings misfortune"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_61"
+  },
+  {
+    "id": 62,
+    "number": 62,
+    "chineseName": "小過",
+    "englishName": "Small Exceeding",
+    "binary": "001100",
+    "description": "Preponderance of the small, slight excess",
+    "changingLines": ["The bird meets with misfortune through flying", "She passes by her ancestor and meets her ancestress", "If one is not extremely careful, somebody may come up from behind and strike him", "No blame; he meets him without passing by", "Dense clouds, no rain from our western region; the prince shoots and hits him who is in the cave", "He passes him by, not meeting him; the flying bird leaves him"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_62"
+  },
+  {
+    "id": 63,
+    "number": 63,
+    "chineseName": "既濟",
+    "englishName": "After Completion",
+    "binary": "010101",
+    "description": "Order achieved, completion, the crossing is completed",
+    "changingLines": ["He brakes his wheels; gets his tail in the water", "The woman loses the curtain of her carriage", "The Illustrious Ancestor disciplines the Devil's Country", "The finest clothes turn to rags; be careful all day long", "The neighbor in the east who slaughters an ox does not attain as much real happiness", "He gets his head in the water; danger"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_63"
+  },
+  {
+    "id": 64,
+    "number": 64,
+    "chineseName": "未濟",
+    "englishName": "Before Completion",
+    "binary": "101010",
+    "description": "Not yet complete, transition, before the crossing",
+    "changingLines": ["He gets his tail in the water; humiliating", "He brakes his wheels; perseverance brings good fortune", "Before completion, attack brings misfortune", "Perseverance brings good fortune, remorse disappears", "Perseverance brings good fortune, no remorse", "There is drinking of wine in genuine confidence; no blame"],
+    "wikipediaURL": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching#Hexagram_64"
+  }
+]

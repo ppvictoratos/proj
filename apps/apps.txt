@@ -1,0 +1,40 @@
+Make sure to show that all are SuperEncrypt verified meaning I don’t want to know about your data I have my own data to worry about. ?  I have most of these created, I just need a realistic schedule. I know 9MUSES is the anchor, it’s coming out November 29th. Its a lot of things.
+
+Here’s the order I do it in:
+
+iChing
+OneTwoThree
+A2NiNG4K
+3Strikes
+FORE4GLE
+PETROiD5
+	🚀 Next Actions (in order):
+Get Apple Developer Account ($99/year)
+Open PETROiD.xcodeproj in Xcode
+Add your Development Team
+Create app icons (use any design tool, rock-themed)
+Test on physical iPhone (NFC needs real hardware)
+Run ./build_for_appstore.sh to verify build
+Archive and upload to App Store Connect
+The hardest part is done - you've got a complete, functional rock battle app with NFC! The submission process is mostly just following the checklist and waiting for Apple's review.
+Tuner8r - 8 Instrument Tuner
+9MUSES
+10po
+
+OneTwoThree
+Simple adult leaning sleek math game. Simple, it has three types of mini games from the home menu: addition, word math ( + / - *) but with the numbers spelt out alphabetically, math cloud (particles of math equations written out as words float around a stormy 3D cloud where there’s at least 3 equations on screen and user has 2 minutes to solve one to destroy one, subdue the cloud! Keep it tight and functional. I like swift. Lahey likes ?
+
+3Strikes - Bool Scores
+ softball, baseball, beer ball, bool 
+
+FORE4GLE - mini golf scoring, regular golf scoring, stats
+
+PETROiD5 - Rock Battles ￼⚔️
+
+A2NiNG4K - audio tuner
+
+Tuner8er - 8 Instrument Tuner 
+Bouzouki Baglamas Guitar(a few variations) Bass Ukulele Viola Voice and a tempo tapper
+
+9MUSES - 
+animated choir drag and drop the humanoid sketches of muses (hero’s jrny visuals) my album essentially as an app. Tell no one about the app. The album itself will be cool. A metal album?
