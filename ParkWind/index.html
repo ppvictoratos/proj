@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f2417">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<title>ParkWind</title>
+<style>
+  :root{
+    --ink:#10291b; --ink-soft:#3d5c49; --paper:#f2f7ef; --card:#ffffff;
+    --accent:#1d7a4c; --accent-ink:#ffffff; --line:#d7e3d4;
+    --cold:#2563eb; --warm:#dc2626;
+    --shadow:0 10px 30px rgba(16,41,27,.18);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Segoe UI,Roboto,sans-serif;color:var(--ink);}
+  button{font:inherit;border:0;cursor:pointer;}
+
+  /* ---------- overlay screens ---------- */
+  .screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    padding:24px;background:linear-gradient(180deg,#dcefdc 0%,#f2f7ef 60%);z-index:40;}
+  .screen[hidden]{display:none;}
+  .card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);
+    padding:28px 26px;max-width:520px;width:100%;max-height:86vh;display:flex;flex-direction:column;}
+  .card h1{margin:0 0 6px;font-size:28px;letter-spacing:-.02em;}
+  .card h2{margin:0 0 4px;font-size:22px;letter-spacing:-.01em;}
+  .card p{margin:6px 0;color:var(--ink-soft);line-height:1.45;}
+  .logo{font-size:40px;line-height:1;margin-bottom:10px;}
+  .park-name{font-size:26px;font-weight:700;margin:14px 0 2px;letter-spacing:-.02em;}
+  .park-sub{color:var(--ink-soft);font-size:15px;margin-bottom:18px;}
+  .btn{display:block;width:100%;padding:16px;border-radius:16px;font-size:18px;font-weight:600;
+    margin-top:10px;transition:transform .06s ease;}
+  .btn:active{transform:scale(.98);}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);}
+  .btn.ghost{background:#eef4ec;color:var(--ink);}
+  .spinner{width:34px;height:34px;border-radius:50%;border:4px solid var(--line);
+    border-top-color:var(--accent);animation:spin .8s linear infinite;margin:0 auto 14px;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .err{color:#b3261e;font-size:15px;}
+
+  /* park picker */
+  #search{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;
+    font-size:17px;margin:12px 0 10px;background:#fbfdfa;color:var(--ink);}
+  #search:focus{outline:2px solid var(--accent);border-color:transparent;}
+  #parkList{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;margin:0;padding:0;list-style:none;}
+  #parkList li{padding:14px 10px;border-bottom:1px solid var(--line);display:flex;
+    justify-content:space-between;align-items:center;gap:10px;cursor:pointer;border-radius:10px;}
+  #parkList li:active{background:#eef4ec;}
+  #parkList .nm{font-weight:600;font-size:17px;}
+  #parkList .dist{color:var(--ink-soft);font-size:14px;white-space:nowrap;}
+
+  /* ---------- main map view ---------- */
+  #stage{position:fixed;inset:0;touch-action:none;display:block;}
+  .hud{position:fixed;z-index:20;}
+  #topbar{top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;right:12px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:10px;pointer-events:none;}
+  #topbar>*{pointer-events:auto;}
+  .chip{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:16px;
+    box-shadow:var(--shadow);padding:10px 14px;}
+  #titleChip .t{font-weight:700;font-size:17px;letter-spacing:-.01em;}
+  #titleChip .s{font-size:13px;color:var(--ink-soft);}
+  #wxChip{text-align:right;font-size:13px;color:var(--ink-soft);}
+  #wxChip .big{font-size:20px;font-weight:700;color:var(--ink);}
+
+  #bottombar{bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;
+    display:flex;justify-content:center;gap:10px;pointer-events:none;padding:0 12px;flex-wrap:wrap;}
+  #bottombar button{pointer-events:auto;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+    border-radius:999px;box-shadow:var(--shadow);padding:12px 18px;font-size:16px;font-weight:600;color:var(--ink);}
+  #bottombar button.active-cold{background:var(--cold);color:#fff;}
+  #bottombar button.active-warm{background:var(--warm);color:#fff;}
+
+  #legend{left:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 78px);
+    background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:14px;
+    box-shadow:var(--shadow);padding:10px 12px;font-size:12px;color:var(--ink-soft);max-width:210px;}
+  #legend .row{display:flex;align-items:center;gap:8px;margin:3px 0;}
+  #legend .bar{height:8px;flex:1;border-radius:4px;
+    background:linear-gradient(90deg,#1e3a8a,#3b82f6,#22d3ee,#a3e635,#facc15,#fb923c,#ef4444);}
+  #legend b{color:var(--ink);}
+
+  #detail{left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 78px);
+    background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:18px;
+    box-shadow:var(--shadow);padding:14px 18px;min-width:270px;max-width:92vw;}
+  #detail[hidden]{display:none;}
+  #detail h3{margin:0 0 8px;font-size:16px;display:flex;justify-content:space-between;gap:16px;}
+  #detail h3 button{background:none;font-size:18px;color:var(--ink-soft);padding:0 2px;}
+  #detail table{border-collapse:collapse;width:100%;font-size:14px;}
+  #detail td{padding:3px 8px 3px 0;color:var(--ink-soft);}
+  #detail td:first-child{font-weight:600;color:var(--ink);}
+  #detail .feels{margin-top:8px;font-size:14px;}
+
+  #toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 70px);left:50%;transform:translateX(-50%);
+    background:rgba(16,41,27,.92);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;
+    z-index:50;opacity:0;transition:opacity .3s;pointer-events:none;max-width:88vw;text-align:center;}
+  #toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- ============ splash / locating ============ -->
+<div class="screen" id="scrSplash">
+  <div class="card" style="text-align:center">
+    <div class="logo">🌳💨</div>
+    <h1>ParkWind</h1>
+    <p id="splashMsg">Finding you…</p>
+    <div class="spinner" id="splashSpin"></div>
+    <button class="btn primary" id="btnLocate" hidden>Use my location</button>
+    <p class="err" id="splashErr" hidden></p>
+  </div>
+</div>
+
+<!-- ============ "is this your location?" ============ -->
+<div class="screen" id="scrConfirm" hidden>
+  <div class="card" style="text-align:center">
+    <div class="logo">📍</div>
+    <h2>Is this your location?</h2>
+    <div class="park-name" id="confirmName">—</div>
+    <div class="park-sub" id="confirmSub"></div>
+    <button class="btn primary" id="btnYes">Yes!</button>
+    <button class="btn ghost" id="btnNo">No — pick another</button>
+  </div>
+</div>
+
+<!-- ============ park picker ============ -->
+<div class="screen" id="scrPick" hidden>
+  <div class="card">
+    <h2>Pick a park</h2>
+    <input id="search" type="search" placeholder="Search parks near you…" autocomplete="off">
+    <ul id="parkList"></ul>
+    <button class="btn ghost" id="btnBackConfirm">Back</button>
+  </div>
+</div>
+
+<!-- ============ loading park ============ -->
+<div class="screen" id="scrLoading" hidden>
+  <div class="card" style="text-align:center">
+    <div class="spinner"></div>
+    <p id="loadMsg">Loading park…</p>
+  </div>
+</div>
+
+<!-- ============ main view ============ -->
+<canvas id="stage"></canvas>
+<div class="hud" id="topbar" hidden>
+  <div class="chip" id="titleChip">
+    <div class="t" id="hudPark">Park</div>
+    <div class="s" id="hudHint">drag to pan · pinch to zoom · twist to rotate</div>
+  </div>
+  <div class="chip" id="wxChip">
+    <div class="big" id="hudTemp">—</div>
+    <div id="hudWind">—</div>
+  </div>
+</div>
+<div class="hud" id="legend" hidden>
+  <div class="row"><b>Arrows</b>&nbsp;10 · 80 · 120 m winds</div>
+  <div class="row"><span>cold</span><div class="bar"></div><span>warm</span></div>
+  <div class="row">length = speed · points downwind</div>
+</div>
+<div class="hud" id="detail" hidden>
+  <h3><span id="dTitle">Spot</span><button id="dClose">✕</button></h3>
+  <table id="dTable"></table>
+  <div class="feels" id="dFeels"></div>
+</div>
+<div class="hud" id="bottombar" hidden>
+  <button id="btnCold">❄️ Coldest</button>
+  <button id="btnWarm">🔥 Warmest</button>
+  <button id="btnView">🗺 2D</button>
+  <button id="btnUnits">°C</button>
+  <button id="btnSwitch">📍 Park</button>
+</div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* =====================================================================
+   ParkWind — top-down park layout + stacked wind arrows (10/80/120 m)
+   Data: OpenStreetMap via Overpass API, weather via Open-Meteo.
+   Single file, no dependencies. Works offline-hosted anywhere (needs HTTPS
+   for geolocation).
+   ===================================================================== */
+
+/* ---------------- tiny helpers ---------------- */
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+const deg2rad = d=>d*Math.PI/180;
+function toast(msg, ms=2600){
+  const t=$("toast"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),ms);
+}
+function haversine(lat1,lon1,lat2,lon2){
+  const R=6371000, dLat=deg2rad(lat2-lat1), dLon=deg2rad(lon2-lon1);
+  const a=Math.sin(dLat/2)**2+Math.cos(deg2rad(lat1))*Math.cos(deg2rad(lat2))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(a));
+}
+function pointInPoly(x,y,poly){
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];
+    if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+function distToPoly(x,y,poly){ // min distance point → polygon vertices (cheap)
+  let d=Infinity;
+  for(const p of poly) d=Math.min(d,Math.hypot(p[0]-x,p[1]-y));
+  return d;
+}
+
+/* ---------------- units ---------------- */
+let imperial = /US|LR|MM/.test((navigator.language||"").split("-")[1]||"");
+const fmtT = c => imperial ? Math.round(c*9/5+32)+"°F" : Math.round(c)+"°C";
+const fmtS = k => imperial ? Math.round(k*0.621371)+" mph" : Math.round(k)+" km/h";
+
+/* ---------------- Overpass ---------------- */
+const OVERPASS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter"
+];
+async function overpass(query){
+  let lastErr;
+  for(const url of OVERPASS){
+    try{
+      const r = await fetch(url,{method:"POST",body:"data="+encodeURIComponent(query),
+        headers:{"Content-Type":"application/x-www-form-urlencoded"}});
+      if(!r.ok) throw new Error("Overpass "+r.status);
+      return await r.json();
+    }catch(e){ lastErr=e; }
+  }
+  throw lastErr || new Error("Overpass unreachable");
+}
+const PARK_RE = "park|garden|nature_reserve|recreation_ground|dog_park|golf_course|common";
+
+async function fetchNearbyParks(lat,lon){
+  for(const radius of [3000,10000,30000]){
+    const q = `[out:json][timeout:25];
+      (way["leisure"~"^(${PARK_RE})$"]["name"](around:${radius},${lat},${lon});
+       relation["leisure"~"^(${PARK_RE})$"]["name"](around:${radius},${lat},${lon}););
+      out tags center 60;`;
+    const js = await overpass(q);
+    const parks = dedupeParks(js.elements, lat, lon);
+    if(parks.length) return parks;
+  }
+  return [];
+}
+async function searchParks(text, lat, lon){
+  const safe = text.replace(/[\\"[\]{}()|^$*+?.]/g,"");
+  if(!safe) return [];
+  const q = `[out:json][timeout:25];
+    (way["leisure"~"^(${PARK_RE})$"]["name"~"${safe}",i](around:40000,${lat},${lon});
+     relation["leisure"~"^(${PARK_RE})$"]["name"~"${safe}",i](around:40000,${lat},${lon}););
+    out tags center 40;`;
+  const js = await overpass(q);
+  return dedupeParks(js.elements, lat, lon);
+}
+function dedupeParks(elements, lat, lon){
+  const seen = new Set(), out=[];
+  for(const el of elements||[]){
+    const c = el.center || el; if(c.lat==null) continue;
+    const name = el.tags && el.tags.name; if(!name) continue;
+    const key = name.toLowerCase();
+    if(seen.has(key)) continue; seen.add(key);
+    out.push({id:el.id, type:el.type, name, lat:c.lat, lon:c.lon,
+      kind:(el.tags.leisure||"park").replace(/_/g," "),
+      dist:haversine(lat,lon,c.lat,c.lon)});
+  }
+  out.sort((a,b)=>a.dist-b.dist);
+  return out;
+}
+
+/* --- park geometry: outer ring(s) in lat/lon --- */
+async function fetchParkGeometry(park){
+  const q = `[out:json][timeout:25];${park.type}(${park.id});out geom;`;
+  const js = await overpass(q);
+  const el = (js.elements||[])[0];
+  if(!el) throw new Error("Park geometry not found");
+  if(el.type==="way" && el.geometry) return [el.geometry.map(g=>[g.lon,g.lat])];
+  if(el.type==="relation" && el.members){
+    const outers = el.members.filter(m=>m.type==="way" && m.geometry &&
+      (m.role==="outer"||m.role===""));
+    const rings = stitchRings(outers.map(m=>m.geometry.map(g=>[g.lon,g.lat])));
+    if(rings.length) return rings;
+  }
+  throw new Error("Unsupported park geometry");
+}
+function stitchRings(segs){
+  const rings=[], pool=segs.filter(s=>s.length>1).map(s=>s.slice());
+  const same=(a,b)=>Math.abs(a[0]-b[0])<1e-7 && Math.abs(a[1]-b[1])<1e-7;
+  while(pool.length){
+    let ring = pool.shift();
+    let grew = true;
+    while(grew && !same(ring[0],ring[ring.length-1])){
+      grew=false;
+      for(let i=0;i<pool.length;i++){
+        const s=pool[i], head=ring[ring.length-1];
+        if(same(head,s[0])){ ring=ring.concat(s.slice(1)); pool.splice(i,1); grew=true; break; }
+        if(same(head,s[s.length-1])){ ring=ring.concat(s.slice(0,-1).reverse()); pool.splice(i,1); grew=true; break; }
+      }
+    }
+    if(ring.length>3) rings.push(ring);
+  }
+  rings.sort((a,b)=>b.length-a.length);
+  return rings;
+}
+
+/* --- features inside park bbox --- */
+async function fetchParkFeatures(bb){
+  const B = `(${bb.s},${bb.w},${bb.n},${bb.e})`;
+  const q = `[out:json][timeout:30];
+    (node["natural"="tree"]${B};
+     way["natural"~"^(water|wood|scrub)$"]${B};
+     way["landuse"~"^(grass|forest|meadow|flowerbed)$"]${B};
+     way["leisure"~"^(pitch|playground|garden|swimming_pool)$"]${B};
+     way["highway"~"^(path|footway|cycleway|track|pedestrian|steps|service)$"]${B};
+     way["building"]${B};);
+    out geom 1500;`;
+  const js = await overpass(q);
+  const f = {trees:[], water:[], woods:[], greens:[], paths:[], buildings:[], pitches:[]};
+  for(const el of js.elements||[]){
+    if(el.type==="node" && el.tags && el.tags.natural==="tree"){
+      f.trees.push([el.lon,el.lat]); continue;
+    }
+    if(el.type!=="way" || !el.geometry) continue;
+    const coords = el.geometry.map(g=>[g.lon,g.lat]);
+    const t = el.tags||{};
+    if(t.natural==="water" || t.leisure==="swimming_pool") f.water.push(coords);
+    else if(t.natural==="wood"||t.landuse==="forest"||t.natural==="scrub") f.woods.push(coords);
+    else if(t.landuse||t.leisure==="garden") f.greens.push(coords);
+    else if(t.leisure==="pitch"||t.leisure==="playground") f.pitches.push(coords);
+    else if(t.highway) f.paths.push(coords);
+    else if(t.building) f.buildings.push(coords);
+  }
+  if(f.trees.length>500){ // thin out huge tree sets, keep spatial spread
+    const step = Math.ceil(f.trees.length/500);
+    f.trees = f.trees.filter((_,i)=>i%step===0);
+  }
+  return f;
+}
+
+/* ---------------- Open-Meteo ---------------- */
+async function fetchWeather(points){ // points: [{lat,lon}]
+  const lats = points.map(p=>p.lat.toFixed(4)).join(",");
+  const lons = points.map(p=>p.lon.toFixed(4)).join(",");
+  const url = "https://api.open-meteo.com/v1/forecast"
+    +"?latitude="+lats+"&longitude="+lons
+    +"&current=temperature_2m,apparent_temperature,relative_humidity_2m,is_day,"
+    +"wind_speed_10m,wind_direction_10m,wind_gusts_10m"
+    +"&hourly=wind_speed_80m,wind_direction_80m,wind_speed_120m,wind_direction_120m,"
+    +"temperature_80m,temperature_120m"
+    +"&forecast_hours=2&wind_speed_unit=kmh&timezone=auto";
+  const r = await fetch(url);
+  if(!r.ok) throw new Error("Weather "+r.status);
+  let js = await r.json();
+  if(!Array.isArray(js)) js=[js];
+  return js.map(loc=>{
+    const c=loc.current, h=loc.hourly, i=0;
+    return {
+      temp:c.temperature_2m, feels:c.apparent_temperature, rh:c.relative_humidity_2m,
+      isDay:!!c.is_day,
+      levels:[
+        {h:10,  speed:c.wind_speed_10m,      dir:c.wind_direction_10m,      temp:c.temperature_2m,  gust:c.wind_gusts_10m},
+        {h:80,  speed:h.wind_speed_80m[i],   dir:h.wind_direction_80m[i],   temp:h.temperature_80m[i]},
+        {h:120, speed:h.wind_speed_120m[i],  dir:h.wind_direction_120m[i],  temp:h.temperature_120m[i]}
+      ]
+    };
+  });
+}
+
+/* ---------------- microclimate estimate ----------------
+   Open-Meteo's grid is km-scale, so raw temps barely vary inside one park.
+   We estimate a per-spot "feels like": shaded/sheltered spots recover part
+   of the wind chill, tree shade cools in daytime sun, water edges run cool. */
+function microclimate(spot, wx, features, proj){
+  const [x,y]=spot;
+  let treesNear=0;
+  for(const t of features.trees){
+    const p=proj(t); if(Math.hypot(p[0]-x,p[1]-y)<40) treesNear++;
+  }
+  let inWood=false;
+  for(const w of features.woodsXY){ if(pointInPoly(x,y,w)){inWood=true;break;} }
+  let shelter = clamp(treesNear/8,0,1); if(inWood) shelter=Math.max(shelter,0.85);
+  let nearWater=false;
+  for(const w of features.waterXY){
+    if(pointInPoly(x,y,w) || distToPoly(x,y,w)<60){nearWater=true;break;}
+  }
+  const chill = Math.min(0, wx.feels - wx.temp);          // wind chill deficit (≤0)
+  const windRecovery = shelter * -chill * 0.7;            // shelter wins some back
+  const shadeAdj = wx.isDay ? -(shelter*2.2) : shelter*0.6;
+  const waterAdj = nearWater ? -0.9 : 0;
+  return {
+    feels: wx.feels + windRecovery + shadeAdj + waterAdj,
+    shelter, nearWater, treesNear, inWood
+  };
+}
+
+/* ---------------- geometry: lat/lon → local meters ---------------- */
+function makeProjector(cLat,cLon){
+  const kx = 111320*Math.cos(deg2rad(cLat)), ky = 110574;
+  return ll => [(ll[0]-cLon)*kx, (ll[1]-cLat)*ky]; // [x east, y north] meters
+}
+function bboxOfRings(rings){
+  let w=180,s=90,e=-180,n=-90;
+  for(const r of rings) for(const [lon,lat] of r){
+    w=Math.min(w,lon); e=Math.max(e,lon); s=Math.min(s,lat); n=Math.max(n,lat);
+  }
+  return {w,s,e,n};
+}
+function makeGrid(outerXY, maxPts=9){
+  let minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+  for(const [x,y] of outerXY){minX=Math.min(minX,x);minY=Math.min(minY,y);
+    maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);}
+  const W=maxX-minX, H=maxY-minY;
+  const aspect=W/Math.max(1,H);
+  let cols=Math.max(1,Math.round(Math.sqrt(maxPts*aspect)));
+  let rows=Math.max(1,Math.round(maxPts/cols));
+  const pts=[];
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const x=minX+W*(c+0.5)/cols, y=minY+H*(r+0.5)/rows;
+    if(pointInPoly(x,y,outerXY)) pts.push([x,y]);
+  }
+  if(pts.length<3){ // tiny/odd shapes: centroid + midpoints of long edges
+    let cx=0,cy=0; for(const [x,y] of outerXY){cx+=x;cy+=y;}
+    cx/=outerXY.length; cy/=outerXY.length;
+    pts.length=0; pts.push([cx,cy]);
+    for(const f of [0.25,0.75]){
+      const x=minX+W*f, y=minY+H*f;
+      if(pointInPoly(x,y,outerXY)) pts.push([x,y]);
+    }
+  }
+  return pts.slice(0,maxPts);
+}
+
+/* ---------------- temperature colour scale ---------------- */
+const TSTOPS=[[-10,[30,58,138]],[0,[59,130,246]],[10,[34,211,238]],
+              [18,[163,230,53]],[24,[250,204,21]],[30,[251,146,60]],[38,[239,68,68]]];
+function tempColor(t){
+  if(t<=TSTOPS[0][0]) return rgb(TSTOPS[0][1]);
+  for(let i=1;i<TSTOPS.length;i++){
+    if(t<=TSTOPS[i][0]){
+      const [t0,c0]=TSTOPS[i-1],[t1,c1]=TSTOPS[i], f=(t-t0)/(t1-t0);
+      return rgb(c0.map((v,k)=>v+(c1[k]-v)*f));
+    }
+  }
+  return rgb(TSTOPS[TSTOPS.length-1][1]);
+}
+const rgb = c=>`rgb(${c.map(Math.round).join(",")})`;
+
+/* =====================================================================
+   APP STATE + FLOW
+   ===================================================================== */
+const S = {
+  user:null,            // {lat,lon}
+  parks:[],             // nearby list
+  park:null,            // chosen park
+  ringsXY:null, features:null, proj:null,
+  spots:[],             // [{x,y,lat,lon, wx, micro}]
+  view:{rot:0, tilt:0.62, zoom:1, panX:0, panY:0, fit:1},
+  sel:-1, highlight:null, // 'cold' | 'warm' | null
+  topDown:false,
+};
+
+function show(id){
+  for(const s of ["scrSplash","scrConfirm","scrPick","scrLoading"]) $(s).hidden = s!==id;
+  const inMap = id===null;
+  $("topbar").hidden = $("bottombar").hidden = $("legend").hidden = !inMap;
+  if(!inMap) $("detail").hidden = true;
+}
+
+/* ---------- 1. locate ---------- */
+function locate(){
+  $("splashMsg").textContent="Finding you…";
+  $("splashErr").hidden=true; $("btnLocate").hidden=true; $("splashSpin").style.display="";
+  if(!navigator.geolocation) return locFail("This browser has no geolocation.");
+  navigator.geolocation.getCurrentPosition(
+    pos=>{ S.user={lat:pos.coords.latitude, lon:pos.coords.longitude}; loadNearby(); },
+    err=>locFail(err.code===1 ? "Location permission denied — allow it in Settings ▸ Safari ▸ Location." :
+                 "Couldn't get a GPS fix ("+err.message+")."),
+    {enableHighAccuracy:true, timeout:15000, maximumAge:60000});
+}
+function locFail(msg){
+  $("splashSpin").style.display="none";
+  $("splashErr").textContent=msg; $("splashErr").hidden=false;
+  $("btnLocate").hidden=false;
+}
+async function loadNearby(){
+  $("splashMsg").textContent="Looking for parks around you…";
+  try{
+    S.parks = await fetchNearbyParks(S.user.lat,S.user.lon);
+    if(!S.parks.length) return locFail("No parks found nearby. Try again somewhere greener 🌵");
+    const p=S.parks[0];
+    $("confirmName").textContent=p.name;
+    $("confirmSub").textContent = cap(p.kind)+" · "+fmtDist(p.dist)+" away";
+    show("scrConfirm");
+  }catch(e){ locFail("Couldn't reach OpenStreetMap ("+e.message+"). Check the tether and retry."); }
+}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const fmtDist=m=> imperial ? (m<160?Math.round(m*3.28)+" ft":(m/1609.34).toFixed(1)+" mi")
+                           : (m<1000?Math.round(m)+" m":(m/1000).toFixed(1)+" km");
+
+/* ---------- 2. pick another ---------- */
+function renderParkList(list){
+  const ul=$("parkList"); ul.innerHTML="";
+  if(!list.length){ ul.innerHTML="<li><span class='nm'>No matches</span></li>"; return; }
+  for(const p of list){
+    const li=document.createElement("li");
+    li.innerHTML=`<span class="nm">${esc(p.name)}<br><small style="color:var(--ink-soft);font-weight:400">${esc(cap(p.kind))}</small></span><span class="dist">${fmtDist(p.dist)}</span>`;
+    li.onclick=()=>loadPark(p);
+    ul.appendChild(li);
+  }
+}
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let searchTimer=null;
+$("search").addEventListener("input",e=>{
+  clearTimeout(searchTimer);
+  const v=e.target.value.trim();
+  searchTimer=setTimeout(async ()=>{
+    if(!v) return renderParkList(S.parks);
+    try{ renderParkList(await searchParks(v,S.user.lat,S.user.lon)); }
+    catch(_){ toast("Search failed — check connection"); }
+  },450);
+});
+
+/* ---------- 3. load a park ---------- */
+async function loadPark(park){
+  S.park=park; show("scrLoading");
+  try{
+    $("loadMsg").textContent="Tracing "+park.name+"…";
+    const rings = await fetchParkGeometry(park);
+    const bb = bboxOfRings(rings);
+    const cLat=(bb.s+bb.n)/2, cLon=(bb.w+bb.e)/2;
+    const proj = makeProjector(cLat,cLon);
+    S.proj = proj;
+    S.ringsXY = rings.map(r=>r.map(proj));
+    S.centerLL = {lat:cLat,lon:cLon};
+
+    $("loadMsg").textContent="Planting trees & water…";
+    let feats;
+    try{ feats = await fetchParkFeatures(bb); }
+    catch(_){ feats={trees:[],water:[],woods:[],greens:[],paths:[],buildings:[],pitches:[]}; }
+    feats.treesXY = feats.trees.map(proj);
+    feats.waterXY = feats.water.map(r=>r.map(proj));
+    feats.woodsXY = feats.woods.map(r=>r.map(proj));
+    feats.greensXY= feats.greens.map(r=>r.map(proj));
+    feats.pathsXY = feats.paths.map(r=>r.map(proj));
+    feats.bldgXY  = feats.buildings.map(r=>r.map(proj));
+    feats.pitchXY = feats.pitches.map(r=>r.map(proj));
+    S.features=feats;
+
+    $("loadMsg").textContent="Reading the wind…";
+    const grid = makeGrid(S.ringsXY[0]);
+    const kx=111320*Math.cos(deg2rad(cLat)), ky=110574;
+    const pts = grid.map(([x,y])=>({lat:cLat+y/ky, lon:cLon+x/kx, x, y}));
+    const wx = await fetchWeather(pts);
+    S.spots = pts.map((p,i)=>({...p, wx:wx[i],
+      micro:microclimate([p.x,p.y], wx[i], {trees:feats.trees, woodsXY:feats.woodsXY, waterXY:feats.waterXY}, proj)}));
+
+    enterMap();
+  }catch(e){
+    console.error(e);
+    show("scrConfirm");
+    toast("Couldn't load that park ("+e.message+") — try another?");
+  }
+}
+
+function enterMap(){
+  show(null);
+  $("hudPark").textContent=S.park.name;
+  const w0=S.spots[0].wx;
+  $("hudTemp").textContent=fmtT(w0.temp);
+  $("hudWind").textContent=fmtS(w0.levels[0].speed)+" "+dirArrow(w0.levels[0].dir)+" "+compass(w0.levels[0].dir);
+  fitView(); S.sel=-1; S.highlight=null;
+  updateHudButtons();
+  needsDraw=true;
+}
+const compass=d=>["N","NE","E","SE","S","SW","W","NW"][Math.round(((d%360)+360)%360/45)%8];
+const dirArrow=d=>["↓","↙","←","↖","↑","↗","→","↘"][Math.round(((d%360)+360)%360/45)%8]; // points downwind
+
+/* =====================================================================
+   RENDERER — 2.5D canvas
+   ===================================================================== */
+const cv=$("stage"), ctx=cv.getContext("2d");
+let DPR=1, needsDraw=true;
+function resize(){
+  DPR=Math.min(2,window.devicePixelRatio||1);
+  cv.width=innerWidth*DPR; cv.height=innerHeight*DPR;
+  cv.style.width=innerWidth+"px"; cv.style.height=innerHeight+"px";
+  needsDraw=true;
+}
+addEventListener("resize",resize); resize();
+
+function fitView(){
+  let minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+  for(const [x,y] of S.ringsXY[0]){minX=Math.min(minX,x);minY=Math.min(minY,y);
+    maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);}
+  const w=maxX-minX,h=maxY-minY;
+  S.view.fit=Math.min(innerWidth/(w*1.25), innerHeight/(h*1.5));
+  S.view.zoom=1; S.view.panX=0; S.view.panY=0; S.view.rot=0;
+}
+/* world (m) → screen px. tilt: 1 = pure top-down, lower = more oblique */
+function proj3(x,y,z){
+  const v=S.view, s=v.fit*v.zoom;
+  const cr=Math.cos(v.rot), sr=Math.sin(v.rot);
+  const rx=x*cr-y*sr, ry=x*sr+y*cr;
+  const t=S.topDown?1:v.tilt;
+  const lift=Math.sqrt(Math.max(0,1-t*t));
+  return [ innerWidth/2 + (rx+v.panX)*s,
+           innerHeight/2 - ((ry+v.panY)*t + z*lift)*s,
+           ry ];
+}
+function polyPath(ring,z=0){
+  ctx.beginPath();
+  ring.forEach(([x,y],i)=>{const p=proj3(x,y,z); i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);});
+  ctx.closePath();
+}
+
+function draw(ts){
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  // sky→ground backdrop
+  const g=ctx.createLinearGradient(0,0,0,innerHeight);
+  g.addColorStop(0,"#dff0fa"); g.addColorStop(.45,"#eaf3e4"); g.addColorStop(1,"#dcead2");
+  ctx.fillStyle=g; ctx.fillRect(0,0,innerWidth,innerHeight);
+  if(!S.ringsXY) return;
+
+  // subtle ground grid
+  ctx.strokeStyle="rgba(16,41,27,.05)"; ctx.lineWidth=1;
+  const ext=800;
+  for(let i=-8;i<=8;i++){
+    let a=proj3(i*100,-ext,0), b=proj3(i*100,ext,0);
+    ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+    a=proj3(-ext,i*100,0); b=proj3(ext,i*100,0);
+    ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+  }
+
+  // park slab: extruded side then top
+  const EXTRUDE=3;
+  ctx.fillStyle="#9dbb8c";
+  for(const ring of S.ringsXY){ polyPath(ring,0); ctx.fill(); }
+  ctx.fillStyle="#b5d3a0";
+  for(const ring of S.ringsXY){ polyPath(ring,EXTRUDE); ctx.fill(); }
+  ctx.strokeStyle="#7fa06c"; ctx.lineWidth=1.5;
+  for(const ring of S.ringsXY){ polyPath(ring,EXTRUDE); ctx.stroke(); }
+
+  const F=S.features;
+  // green patches, pitches, water, buildings, paths — flat on the slab
+  ctx.fillStyle="#a8cd90";
+  for(const r of F.greensXY){ polyPath(r,EXTRUDE); ctx.fill(); }
+  ctx.fillStyle="#c9dc9e";
+  for(const r of F.pitchXY){ polyPath(r,EXTRUDE); ctx.fill(); }
+  ctx.fillStyle="#8fbcd9";
+  for(const r of F.waterXY){ polyPath(r,EXTRUDE); ctx.fill(); }
+  ctx.fillStyle="#d8cdb8"; ctx.strokeStyle="#bfae90";
+  for(const r of F.bldgXY){ polyPath(r,EXTRUDE); ctx.fill(); ctx.stroke(); }
+  ctx.strokeStyle="rgba(240,236,222,.9)"; ctx.lineWidth=2.5; ctx.lineCap="round";
+  for(const r of F.pathsXY){
+    ctx.beginPath();
+    r.forEach(([x,y],i)=>{const p=proj3(x,y,EXTRUDE); i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);});
+    ctx.stroke();
+  }
+  // wood polygons as darker canopy areas
+  ctx.fillStyle="rgba(74,124,63,.35)";
+  for(const r of F.woodsXY){ polyPath(r,EXTRUDE); ctx.fill(); }
+
+  // depth-sorted billboards: trees + wind markers
+  const items=[];
+  for(const [x,y] of F.treesXY){
+    if(!pointInPoly(x,y,S.ringsXY[0])) continue;
+    items.push({d:proj3(x,y,0)[2], draw:()=>drawTree(x,y)});
+  }
+  S.spots.forEach((sp,i)=>items.push({d:proj3(sp.x,sp.y,0)[2], draw:()=>drawMarker(sp,i,ts)}));
+  items.sort((a,b)=>b.d-a.d);
+  for(const it of items) it.draw();
+
+  drawCompass();
+}
+
+function drawTree(x,y){
+  const base=proj3(x,y,3), top=proj3(x,y,9);
+  const s=S.view.fit*S.view.zoom, r=Math.max(2.5, 3.2*s);
+  ctx.strokeStyle="#7a5c3e"; ctx.lineWidth=Math.max(1,0.8*s);
+  ctx.beginPath(); ctx.moveTo(base[0],base[1]); ctx.lineTo(top[0],top[1]); ctx.stroke();
+  ctx.fillStyle="#4a7c3f";
+  ctx.beginPath(); ctx.arc(top[0],top[1],r,0,7); ctx.fill();
+  ctx.fillStyle="rgba(255,255,255,.14)";
+  ctx.beginPath(); ctx.arc(top[0]-r*.3,top[1]-r*.3,r*.55,0,7); ctx.fill();
+}
+
+/* --- the star of the show: 3 stacked arrows --- */
+const LEVEL_Z=[14,30,46];
+function drawMarker(sp,idx,ts){
+  const selected = idx===S.sel;
+  const isCold = S.highlight==="cold" && idx===S.extremes.cold;
+  const isWarm = S.highlight==="warm" && idx===S.extremes.warm;
+  const base=proj3(sp.x,sp.y,3);
+  // ground disc
+  ctx.fillStyle = isCold?"rgba(37,99,235,.30)": isWarm?"rgba(220,38,38,.30)":"rgba(16,41,27,.14)";
+  ctx.beginPath(); ctx.ellipse(base[0],base[1],14,7,0,0,7); ctx.fill();
+  if(isCold||isWarm||selected){
+    const pulse=1+0.18*Math.sin(ts/280);
+    ctx.strokeStyle=isCold?"#2563eb":isWarm?"#dc2626":"#10291b";
+    ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.ellipse(base[0],base[1],20*pulse,10*pulse,0,0,7); ctx.stroke();
+  }
+  // pole
+  const top=proj3(sp.x,sp.y,LEVEL_Z[2]+6);
+  ctx.strokeStyle="rgba(16,41,27,.35)"; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(base[0],base[1]); ctx.lineTo(top[0],top[1]); ctx.stroke();
+  // three arrows, bottom-up
+  sp.wx.levels.forEach((lv,i)=>drawArrow(sp,lv,LEVEL_Z[i],ts));
+  // feels-like tag
+  const m=sp.micro;
+  const tag=proj3(sp.x,sp.y,LEVEL_Z[2]+14);
+  const label=(isCold?"❄️ ":"")+(isWarm?"🔥 ":"")+fmtT(m.feels);
+  ctx.font="600 12px -apple-system,sans-serif";
+  const tw=ctx.measureText(label).width+12;
+  ctx.fillStyle=selected?"#10291b":"rgba(255,255,255,.9)";
+  roundRect(tag[0]-tw/2, tag[1]-19, tw, 19, 8); ctx.fill();
+  ctx.fillStyle=selected?"#fff":"#10291b";
+  ctx.textAlign="center"; ctx.fillText(label, tag[0], tag[1]-5.5);
+}
+function roundRect(x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+function drawArrow(sp,lv,z,ts){
+  // meteorological dir = where wind comes FROM; arrow points downwind
+  const toRad = deg2rad((lv.dir+180)%360);
+  const len = clamp(8+lv.speed*1.1, 10, 42);           // meters
+  const drift = ((ts/900)%1)*6-3;                       // slide along wind
+  const ux=Math.sin(toRad), uy=Math.cos(toRad);
+  const x0=sp.x-ux*(len/2-drift), y0=sp.y-uy*(len/2-drift);
+  const x1=sp.x+ux*(len/2+drift), y1=sp.y+uy*(len/2+drift);
+  const a=proj3(x0,y0,z), b=proj3(x1,y1,z);
+  const col=tempColor(lv.temp);
+  const wpx=clamp(2.2+lv.speed*0.12, 2.5, 8);
+  // outline for readability
+  ctx.lineCap="round";
+  ctx.strokeStyle="rgba(255,255,255,.85)"; ctx.lineWidth=wpx+3;
+  seg(a,b);
+  ctx.strokeStyle=col; ctx.lineWidth=wpx;
+  seg(a,b);
+  // head
+  const ang=Math.atan2(b[1]-a[1],b[0]-a[0]), hs=wpx*2.4;
+  ctx.fillStyle=col; ctx.strokeStyle="rgba(255,255,255,.85)"; ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(b[0]+Math.cos(ang)*hs*1.6, b[1]+Math.sin(ang)*hs*1.6);
+  ctx.lineTo(b[0]+Math.cos(ang+2.5)*hs, b[1]+Math.sin(ang+2.5)*hs);
+  ctx.lineTo(b[0]+Math.cos(ang-2.5)*hs, b[1]+Math.sin(ang-2.5)*hs);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+}
+function seg(a,b){ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+
+function drawCompass(){
+  const r=22, x=innerWidth-r-16, y=r+16+ (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat'))||0) + 66;
+  ctx.save();
+  ctx.translate(x,y); ctx.rotate(S.view.rot);
+  ctx.fillStyle="rgba(255,255,255,.92)";
+  ctx.beginPath(); ctx.arc(0,0,r,0,7); ctx.fill();
+  ctx.fillStyle="#dc2626";
+  ctx.beginPath(); ctx.moveTo(0,-r+6); ctx.lineTo(5,2); ctx.lineTo(-5,2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle="#10291b"; ctx.font="700 10px -apple-system,sans-serif"; ctx.textAlign="center";
+  ctx.fillText("N",0,14);
+  ctx.restore();
+}
+
+/* animation loop (arrows drift, pulses) */
+function loop(ts){
+  if(S.ringsXY && !$("topbar").hidden){ draw(ts); }
+  else if(needsDraw){ draw(ts); needsDraw=false; }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   GESTURES — pan / pinch-zoom / twist-rotate / tap
+   ===================================================================== */
+const ptrs=new Map();
+let pinch0=null, tapStart=null;
+cv.addEventListener("pointerdown",e=>{
+  cv.setPointerCapture(e.pointerId);
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1) tapStart={x:e.clientX,y:e.clientY,t:Date.now()};
+  if(ptrs.size===2){
+    const [a,b]=[...ptrs.values()];
+    pinch0={d:Math.hypot(a.x-b.x,a.y-b.y), ang:Math.atan2(b.y-a.y,b.x-a.x),
+            zoom:S.view.zoom, rot:S.view.rot};
+    tapStart=null;
+  }
+});
+cv.addEventListener("pointermove",e=>{
+  const p=ptrs.get(e.pointerId); if(!p) return;
+  const dx=e.clientX-p.x, dy=e.clientY-p.y;
+  p.x=e.clientX; p.y=e.clientY;
+  if(!S.ringsXY) return;
+  const v=S.view, s=v.fit*v.zoom;
+  if(ptrs.size===1){
+    // pan in world coords (respect rotation + tilt)
+    const t=S.topDown?1:v.tilt;
+    const wx=dx/s, wy=-dy/(s*t);
+    const cr=Math.cos(-v.rot), sr=Math.sin(-v.rot);
+    v.panX += wx*cr - wy*sr;
+    v.panY += wx*sr + wy*cr;
+    if(tapStart && Math.hypot(e.clientX-tapStart.x, e.clientY-tapStart.y)>10) tapStart=null;
+  }else if(ptrs.size===2 && pinch0){
+    const [a,b]=[...ptrs.values()];
+    const d=Math.hypot(a.x-b.x,a.y-b.y), ang=Math.atan2(b.y-a.y,b.x-a.x);
+    v.zoom=clamp(pinch0.zoom*d/pinch0.d, .3, 8);
+    v.rot=pinch0.rot+(ang-pinch0.ang);
+  }
+  needsDraw=true;
+});
+function endPtr(e){
+  ptrs.delete(e.pointerId);
+  if(ptrs.size<2) pinch0=null;
+  if(tapStart && Date.now()-tapStart.t<350){ handleTap(tapStart.x,tapStart.y); }
+  tapStart=null;
+}
+cv.addEventListener("pointerup",endPtr);
+cv.addEventListener("pointercancel",endPtr);
+cv.addEventListener("wheel",e=>{
+  e.preventDefault();
+  S.view.zoom=clamp(S.view.zoom*(e.deltaY<0?1.1:0.9), .3, 8);
+  needsDraw=true;
+},{passive:false});
+
+function handleTap(x,y){
+  if(!S.spots.length) return;
+  let best=-1,bd=48;
+  S.spots.forEach((sp,i)=>{
+    for(const z of [3,...LEVEL_Z]){
+      const p=proj3(sp.x,sp.y,z);
+      const d=Math.hypot(p[0]-x,p[1]-y);
+      if(d<bd){bd=d;best=i;}
+    }
+  });
+  if(best>=0){ S.sel = (S.sel===best)? -1 : best; showDetail(); }
+  else { S.sel=-1; $("detail").hidden=true; }
+  needsDraw=true;
+}
+function showDetail(){
+  if(S.sel<0){ $("detail").hidden=true; return; }
+  const sp=S.spots[S.sel], m=sp.micro;
+  $("dTitle").textContent="Spot "+(S.sel+1)+" of "+S.spots.length;
+  $("dTable").innerHTML = sp.wx.levels.map(lv=>
+    `<tr><td>${lv.h} m</td><td>${fmtS(lv.speed)} ${compass(lv.dir)}</td>`+
+    `<td style="color:${tempColor(lv.temp)};font-weight:700">${fmtT(lv.temp)}</td></tr>`).join("");
+  const bits=[];
+  if(m.inWood) bits.push("under tree canopy");
+  else if(m.treesNear>2) bits.push(m.treesNear+" trees nearby");
+  if(m.nearWater) bits.push("near water");
+  if(!bits.length) bits.push("open ground");
+  $("dFeels").innerHTML=`Feels like <b>${fmtT(m.feels)}</b> here — ${bits.join(", ")}`;
+  $("detail").hidden=false;
+}
+$("dClose").onclick=()=>{S.sel=-1;$("detail").hidden=true;needsDraw=true;};
+
+/* =====================================================================
+   BUTTONS
+   ===================================================================== */
+function computeExtremes(){
+  let cold=0, warm=0;
+  S.spots.forEach((sp,i)=>{
+    if(sp.micro.feels < S.spots[cold].micro.feels) cold=i;
+    if(sp.micro.feels > S.spots[warm].micro.feels) warm=i;
+  });
+  S.extremes={cold,warm};
+}
+function updateHudButtons(){
+  computeExtremes();
+  $("btnCold").classList.toggle("active-cold", S.highlight==="cold");
+  $("btnWarm").classList.toggle("active-warm", S.highlight==="warm");
+  $("btnView").textContent = S.topDown ? "⛰ 3D" : "🗺 2D";
+  $("btnUnits").textContent = imperial ? "°F" : "°C";
+}
+$("btnCold").onclick=()=>{
+  S.highlight = S.highlight==="cold"? null:"cold";
+  if(S.highlight){ S.sel=S.extremes.cold; showDetail();
+    toast("Coldest spot: feels like "+fmtT(S.spots[S.extremes.cold].micro.feels)); }
+  updateHudButtons(); needsDraw=true;
+};
+$("btnWarm").onclick=()=>{
+  S.highlight = S.highlight==="warm"? null:"warm";
+  if(S.highlight){ S.sel=S.extremes.warm; showDetail();
+    toast("Warmest spot: feels like "+fmtT(S.spots[S.extremes.warm].micro.feels)); }
+  updateHudButtons(); needsDraw=true;
+};
+$("btnView").onclick=()=>{ S.topDown=!S.topDown; updateHudButtons(); needsDraw=true; };
+$("btnUnits").onclick=()=>{
+  imperial=!imperial; updateHudButtons(); enterMapHudRefresh(); showDetail(); needsDraw=true;
+};
+function enterMapHudRefresh(){
+  if(!S.spots.length) return;
+  const w0=S.spots[0].wx;
+  $("hudTemp").textContent=fmtT(w0.temp);
+  $("hudWind").textContent=fmtS(w0.levels[0].speed)+" "+dirArrow(w0.levels[0].dir)+" "+compass(w0.levels[0].dir);
+}
+$("btnSwitch").onclick=()=>{ renderParkList(S.parks); show("scrPick"); };
+
+$("btnYes").onclick=()=>loadPark(S.parks[0]);
+$("btnNo").onclick=()=>{ renderParkList(S.parks); $("search").value=""; show("scrPick"); };
+$("btnBackConfirm").onclick=()=>show(S.park?null:"scrConfirm");
+$("btnLocate").onclick=locate;
+
+/* refresh weather every 10 min while visible */
+setInterval(async ()=>{
+  if(document.hidden || !S.spots.length) return;
+  try{
+    const wx=await fetchWeather(S.spots);
+    S.spots.forEach((sp,i)=>{ sp.wx=wx[i];
+      sp.micro=microclimate([sp.x,sp.y], wx[i],
+        {trees:S.features.trees, woodsXY:S.features.woodsXY, waterXY:S.features.waterXY}, S.proj); });
+    computeExtremes(); enterMapHudRefresh(); needsDraw=true;
+  }catch(_){}
+}, 10*60*1000);
+
+/* go */
+show("scrSplash");
+locate();
+</script>
+</body>
+</html>
