@@ -1,0 +1,12 @@
+{
+  "name": "ParkWind",
+  "short_name": "ParkWind",
+  "description": "Top-down park layout with stacked wind arrows — find the coldest or warmest spot.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f2f7ef",
+  "theme_color": "#0f2417",
+  "icons": [
+    { "src": "icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
