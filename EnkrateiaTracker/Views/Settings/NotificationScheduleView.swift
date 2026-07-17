@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct NotificationScheduleView: View {
+    let notificationManager: NotificationManager
     @State private var selectedTime = Date()
     @Environment(\.dismiss) var dismiss
 
@@ -31,10 +32,7 @@ struct NotificationScheduleView: View {
 
                 Button(action: {
                     let components = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
-                    NotificationService.shared.scheduleWorkoutNotification(
-                        for: .day1,
-                        at: components
-                    )
+                    notificationManager.enableNotifications(at: components)
                     dismiss()
                 }) {
                     Text("Save")
@@ -55,5 +53,5 @@ struct NotificationScheduleView: View {
 }
 
 #Preview {
-    NotificationScheduleView()
+    NotificationScheduleView(notificationManager: NotificationManager())
 }
