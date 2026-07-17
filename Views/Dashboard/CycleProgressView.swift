@@ -8,23 +8,23 @@ struct CycleProgressView: View {
             ZStack {
                 // Background circle
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 2)
+                    .stroke(Theme.textSecondary.opacity(0.2), lineWidth: 2)
                     .frame(width: 200, height: 200)
 
                 // Progress arc
                 Circle()
                     .trim(from: 0, to: Double(currentDay.rawValue) / 4.0)
-                    .stroke(Color.cyan, lineWidth: 4)
+                    .stroke(Theme.accentCyan, lineWidth: 4)
                     .frame(width: 200, height: 200)
                     .rotationEffect(.degrees(-90))
 
                 VStack(spacing: 8) {
                     Text("Day \(currentDay.rawValue)")
                         .font(.system(size: 32, weight: .bold, design: .monospaced))
-                        .foregroundColor(.white)
+                        .foregroundColor(Theme.textPrimary)
                     Text(currentDay.name)
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Theme.textSecondary)
                 }
             }
 
@@ -32,22 +32,22 @@ struct CycleProgressView: View {
                 ForEach(1...4, id: \.self) { day in
                     VStack {
                         Circle()
-                            .fill(day <= currentDay.rawValue ? Color.cyan : Color.gray.opacity(0.3))
+                            .fill(day <= currentDay.rawValue ? Theme.accentCyan : Theme.textSecondary.opacity(0.3))
                             .frame(width: 40, height: 40)
                             .overlay(
                                 Text("\(day)")
                                     .font(.caption2)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Theme.textPrimary)
                             )
                         Text("D\(day)")
                             .font(.caption2)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                     }
                 }
             }
         }
         .padding()
-        .background(Color(UIColor.systemGray6).opacity(0.3))
+        .background(Theme.cardBG)
         .cornerRadius(12)
     }
 }

@@ -11,30 +11,30 @@ struct UpcomingWorkoutCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(day.name)
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Theme.textPrimary)
                     Text(day.description)
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Theme.textSecondary)
                 }
                 Spacer()
                 Image(systemName: "arrow.right.circle.fill")
                     .font(.system(size: 28))
-                    .foregroundColor(.cyan)
+                    .foregroundColor(Theme.accentCyan)
             }
 
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(exercises, id: \.id) { exercise in
                     HStack(spacing: 8) {
                         Circle()
-                            .fill(Color.cyan)
+                            .fill(Theme.accentCyan)
                             .frame(width: 4, height: 4)
                         Text(exercise.name)
                             .font(.caption)
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.textPrimary)
                         Spacer()
                         Text(exercise.muscleGroup)
                             .font(.caption2)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                     }
                 }
             }
@@ -44,13 +44,13 @@ struct UpcomingWorkoutCard: View {
                     .font(.system(weight: .semibold))
                     .frame(maxWidth: .infinity)
                     .padding(12)
-                    .background(Color.cyan)
+                    .background(Theme.accentCyan)
                     .foregroundColor(.black)
                     .cornerRadius(8)
             }
         }
         .padding(16)
-        .background(Color(UIColor.systemGray6).opacity(0.3))
+        .background(Theme.cardBG)
         .cornerRadius(12)
     }
 }

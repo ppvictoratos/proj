@@ -6,22 +6,22 @@ struct SessionDetailView: View {
 
     var body: some View {
         ZStack {
-            Color(UIColor.systemGray6).opacity(0.1).ignoresSafeArea()
+            Theme.darkBG.ignoresSafeArea()
 
             VStack(spacing: 16) {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(session.tetradDay.name)
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.textPrimary)
                         Text(session.date.formatted(date: .complete, time: .shortened))
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                     }
                     Spacer()
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                     }
                 }
 
@@ -31,23 +31,23 @@ struct SessionDetailView: View {
                             HStack {
                                 Text(log.exerciseName)
                                     .font(.caption)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Theme.textPrimary)
                                 Spacer()
                                 if log.usedDippingBelt {
                                     Text("Belt")
                                         .font(.caption2)
                                         .padding(4)
-                                        .background(Color.cyan.opacity(0.2))
-                                        .foregroundColor(.cyan)
+                                        .background(Theme.accentCyan.opacity(0.2))
+                                        .foregroundColor(Theme.accentCyan)
                                         .cornerRadius(4)
                                 }
                             }
                             Text("\(log.sets)×\(log.reps)" + (log.weight.map { " @ \($0) lbs" } ?? ""))
                                 .font(.caption2)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Theme.textSecondary)
                         }
                         .padding(8)
-                        .background(Color(UIColor.systemGray6).opacity(0.3))
+                        .background(Theme.cardBG)
                         .cornerRadius(6)
                     }
                 }

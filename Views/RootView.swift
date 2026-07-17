@@ -21,7 +21,7 @@ struct RootView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
-        .tint(.cyan)
+        .tint(Theme.accentCyan)
     }
 }
 

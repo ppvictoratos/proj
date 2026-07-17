@@ -16,12 +16,12 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(UIColor.systemGray6).opacity(0.1).ignoresSafeArea()
+                Theme.darkBG.ignoresSafeArea()
 
                 VStack(spacing: 24) {
                     Text("Enkrateia")
                         .font(.system(size: 32, weight: .bold, design: .monospaced))
-                        .foregroundColor(.white)
+                        .foregroundColor(Theme.textPrimary)
 
                     // Show program-specific UI
                     if viewModel.selectedProgram == .tetrad {
@@ -41,13 +41,13 @@ struct DashboardView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Daily Recovery Routine")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(Theme.textPrimary)
                             Text("Follow this every day to aid recovery")
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Theme.textSecondary)
                         }
                         .padding(16)
-                        .background(Color(UIColor.systemGray6).opacity(0.3))
+                        .background(Theme.cardBG)
                         .cornerRadius(12)
 
                         UpcomingWorkoutCard(
@@ -64,20 +64,20 @@ struct DashboardView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Recent Activity")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
 
                         if let lastDate = viewModel.lastWorkoutDate() {
                             Text("Last: \(lastDate.formatted(date: .abbreviated, time: .omitted))")
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Theme.textSecondary)
                         } else {
                             Text("No workouts yet. Time to begin.")
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Theme.textSecondary)
                         }
                     }
                     .padding(12)
-                    .background(Color(UIColor.systemGray6).opacity(0.3))
+                    .background(Theme.cardBG)
                     .cornerRadius(8)
 
                     Spacer()

@@ -9,18 +9,19 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(UIColor.systemGray6).opacity(0.1).ignoresSafeArea()
+                Theme.darkBG.ignoresSafeArea()
 
                 VStack(spacing: 16) {
                     Text("History")
                         .font(.system(size: 32, weight: .bold, design: .monospaced))
+                        .foregroundColor(Theme.textPrimary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(16)
 
                     if allSessions.isEmpty {
                         Text("No workouts yet")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     } else {
                         List {
@@ -29,13 +30,13 @@ struct HistoryView: View {
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(session.tetradDay.name)
                                             .font(.caption)
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Theme.textPrimary)
                                         Text(session.date.formatted(date: .abbreviated, time: .shortened))
                                             .font(.caption2)
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(Theme.textSecondary)
                                         Text("\(session.exercises.count) exercises")
                                             .font(.caption2)
-                                            .foregroundColor(.cyan)
+                                            .foregroundColor(Theme.accentCyan)
                                     }
                                 }
                             }

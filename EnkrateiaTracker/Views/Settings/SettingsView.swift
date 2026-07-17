@@ -8,11 +8,12 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(UIColor.systemGray6).opacity(0.1).ignoresSafeArea()
+                Theme.darkBG.ignoresSafeArea()
 
                 VStack(spacing: 16) {
                     Text("Settings")
                         .font(.system(size: 32, weight: .bold, design: .monospaced))
+                        .foregroundColor(Theme.textPrimary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(16)
 
@@ -20,7 +21,7 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Training Program")
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Theme.textSecondary)
 
                             Picker("Program", selection: $programManager.selectedProgram) {
                                 ForEach(programManager.availablePrograms, id: \.self) { program in
@@ -29,7 +30,7 @@ struct SettingsView: View {
                                             .font(.caption)
                                         Text(program.description)
                                             .font(.caption2)
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(Theme.textSecondary)
                                     }
                                     .tag(program)
                                 }
@@ -37,27 +38,27 @@ struct SettingsView: View {
                             .pickerStyle(.segmented)
                         }
                         .padding(12)
-                        .background(Color(UIColor.systemGray6).opacity(0.3))
+                        .background(Theme.cardBG)
                         .cornerRadius(8)
 
                         Toggle("Notifications", isOn: $notificationsEnabled)
-                            .foregroundColor(.white)
-                            .tint(.cyan)
+                            .foregroundColor(Theme.textPrimary)
+                            .tint(Theme.accentCyan)
                             .padding(12)
-                            .background(Color(UIColor.systemGray6).opacity(0.3))
+                            .background(Theme.cardBG)
                             .cornerRadius(8)
 
                         if notificationsEnabled {
                             NavigationLink(destination: NotificationScheduleView()) {
                                 HStack {
                                     Text("Notification Time")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Theme.textPrimary)
                                     Spacer()
                                     Text(dailyTime.formatted(time: .shortened))
-                                        .foregroundColor(.cyan)
+                                        .foregroundColor(Theme.accentCyan)
                                 }
                                 .padding(12)
-                                .background(Color(UIColor.systemGray6).opacity(0.3))
+                                .background(Theme.cardBG)
                                 .cornerRadius(8)
                             }
                         }

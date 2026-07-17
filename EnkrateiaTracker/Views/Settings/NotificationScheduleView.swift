@@ -6,23 +6,23 @@ struct NotificationScheduleView: View {
 
     var body: some View {
         ZStack {
-            Color(UIColor.systemGray6).opacity(0.1).ignoresSafeArea()
+            Theme.darkBG.ignoresSafeArea()
 
             VStack(spacing: 24) {
                 HStack {
                     Text("Daily Reminder")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Theme.textPrimary)
                     Spacer()
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Theme.textSecondary)
                     }
                 }
 
                 VStack(spacing: 8) {
                     Text("What time should we remind you?")
-                        .foregroundColor(.gray)
+                        .foregroundColor(Theme.textSecondary)
 
                     DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
                         .datePickerStyle(.wheel)
@@ -41,7 +41,7 @@ struct NotificationScheduleView: View {
                         .font(.system(weight: .semibold))
                         .frame(maxWidth: .infinity)
                         .padding(16)
-                        .background(Color.cyan)
+                        .background(Theme.accentCyan)
                         .foregroundColor(.black)
                         .cornerRadius(8)
                 }
