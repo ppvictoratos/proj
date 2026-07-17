@@ -1,0 +1,29 @@
+name: ParkWind
+options:
+  bundleIdPrefix: com.petrovicatos
+  deploymentTarget:
+    iOS: "17.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  ParkWind:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ParkWind
+    info:
+      path: ParkWind/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: ParkWind
+        NSLocationWhenInUseUsageDescription: "ParkWind uses your location to find the park you're standing in."
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.petrovicatos.ParkWind
+        TARGETED_DEVICE_FAMILY: "1,2"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown"
