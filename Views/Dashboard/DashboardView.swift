@@ -3,10 +3,14 @@ import SwiftData
 
 struct DashboardView: View {
     @StateObject private var viewModel: TetradCycleViewModel
-    @State private var showWorkoutView = false
-    @State private var activeSession: WorkoutSession?
+    @State private var selectedExercise: Exercise?
+    @State private var showExerciseDetail = false
+    @State private var activeTab: String = "dashboard"
 
     private let modelContext: ModelContext
+    private let marbleBlack = Color(red: 0.04, green: 0.04, blue: 0.04)
+    private let accentCyan = Color(red: 0.13, green: 0.8, blue: 0.8)
+    private let textLight = Color(red: 0.91, green: 0.91, blue: 0.91)
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -14,79 +18,49 @@ struct DashboardView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Theme.darkBG.ignoresSafeArea()
+        ZStack {
+            marbleBlack.ignoresSafeArea()
 
-                VStack(spacing: 24) {
-                    Text("Enkrateia")
-                        .font(.system(size: 32, weight: .bold, design: .monospaced))
-                        .foregroundColor(Theme.textPrimary)
+            VStack(spacing: 20) {
+                Text("ENKRATEIA")
+                    .font(.system(size: 40, weight: .bold, design: .monospaced))
+                    .foregroundColor(textLight)
 
-                    // Show program-specific UI
-                    if viewModel.selectedProgram == .tetrad {
-                        CycleProgressView(currentDay: viewModel.cycle.currentDay)
-
-                        UpcomingWorkoutCard(
-                            day: viewModel.cycle.currentDay,
-                            exercises: viewModel.currentExercises
-                        ) {
-                            activeSession = viewModel.createWorkoutSession(
-                                for: viewModel.cycle.currentDay
-                            )
-                            showWorkoutView = true
-                        }
-                    } else {
-                        // Injury recovery: show daily routine, no cycle
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Daily Recovery Routine")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(Theme.textPrimary)
-                            Text("Follow this every day to aid recovery")
-                                .font(.caption)
-                                .foregroundColor(Theme.textSecondary)
-                        }
-                        .padding(16)
-                        .background(Theme.cardBG)
-                        .cornerRadius(12)
-
-                        UpcomingWorkoutCard(
-                            day: .day1,  // Dummy day for layout
-                            exercises: viewModel.currentExercises
-                        ) {
-                            activeSession = viewModel.createWorkoutSession(
-                                for: .day1  // Use day1 for injury protocol sessions
-                            )
-                            showWorkoutView = true
-                        }
-                    }
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Recent Activity")
-                            .font(.caption)
-                            .foregroundColor(Theme.textSecondary)
-
-                        if let lastDate = viewModel.lastWorkoutDate() {
-                            Text("Last: \(lastDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption)
-                                .foregroundColor(Theme.textSecondary)
-                        } else {
-                            Text("No workouts yet. Time to begin.")
-                                .font(.caption)
-                                .foregroundColor(Theme.textSecondary)
-                        }
-                    }
-                    .padding(12)
-                    .background(Theme.cardBG)
-                    .cornerRadius(8)
-
-                    Spacer()
+                RotatedSquareView(exercises: viewModel.currentExercises) { exercise in
+                    selectedExercise = exercise
+                    showExerciseDetail = true
                 }
-                .padding(16)
+
+                Spacer()
+
+                // Bottom buttons
+                HStack(spacing: 20) {
+                    Button(action: {}) {
+                        Text("EXERCISES")
+                            .font(.system(weight: .semibold, size: 14))
+                            .frame(maxWidth: .infinity)
+                            .padding(12)
+                            .background(accentCyan)
+                            .foregroundColor(.black)
+                            .cornerRadius(8)
+                    }
+
+                    Button(action: {}) {
+                        Text("TETRADS")
+                            .font(.system(weight: .semibold, size: 14))
+                            .frame(maxWidth: .infinity)
+                            .padding(12)
+                            .background(accentCyan.opacity(0.2))
+                            .foregroundColor(accentCyan)
+                            .cornerRadius(8)
+                    }
+                }
             }
-            .navigationDestination(isPresented: $showWorkoutView) {
-                if let session = activeSession {
-                    WorkoutView(session: session, modelContext: modelContext)
+            .padding(20)
+
+            .sheet(isPresented: $showExerciseDetail) {
+                if let exercise = selectedExercise {
+                    ExerciseDetailView(exercise: exercise, modelContext: modelContext)
                 }
             }
         }
@@ -95,4 +69,5 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView(modelContext: .preview)
+        .modelContainer(ModelContainerProvider.shared.container)
 }
