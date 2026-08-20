@@ -1,0 +1,43 @@
+.complexity-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.complexity-label {
+  font-size: 10px;
+  color: #00cc33;
+  letter-spacing: 2px;
+}
+
+.complexity-buttons {
+  display: flex;
+  gap: 2px;
+  border: 1px solid #00ff4133;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.complexity-btn {
+  background: none;
+  border: none;
+  color: #00cc33;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+
+.complexity-btn:hover {
+  background: #00ff4111;
+  color: #00ff41;
+}
+
+.complexity-btn.active {
+  background: #00ff41;
+  color: #0a0e27;
+  font-weight: bold;
+}
