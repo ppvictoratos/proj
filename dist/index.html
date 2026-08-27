@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORE4GLE - Mini Golf</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #2a2a2a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .flag {
+            font-size: 1.5em;
+        }
+        canvas {
+            border: 4px solid white;
+            background: linear-gradient(180deg, #5dd962 0%, #3db13f 100%);
+            cursor: grab;
+            display: block;
+        }
+        canvas:active {
+            cursor: grabbing;
+        }
+        .info {
+            color: white;
+            text-align: center;
+            font-size: 1em;
+            max-width: 500px;
+        }
+        .info-text {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .sunk-message {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #ffd700;
+            margin-top: 10px;
+        }
+        button {
+            padding: 12px 40px;
+            font-size: 1em;
+            background: white;
+            color: #2a2a2a;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FORE4GLE <span class="flag">🚩</span></h1>
+        <canvas id="gameCanvas" width="750" height="700"></canvas>
+        <div class="info">
+            <div class="info-text">Drag back from the ball and release to shoot (slingshot)</div>
+            <div class="info-text">Strokes: <span id="strokes">0</span> | Ball Velocity: <span id="velocity">0.0</span></div>
+            <div id="sunkInfo"></div>
+            <button id="resetBtn">Reset Hole</button>
+        </div>
+    </div>
+
+    <script>
+        let invoke;
+
+        function initTauri() {
+            const tauri = window.__TAURI__;
+            if (!tauri) {
+                console.log('Waiting for Tauri...');
+                setTimeout(initTauri, 100);
+                return;
+            }
+            invoke = tauri.core.invoke;
+            console.log('Tauri ready');
+            startGame();
+        }
+
+        initTauri();
+
+        function startGame() {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const resetBtn = document.getElementById('resetBtn');
+            const strokesEl = document.getElementById('strokes');
+            const velocityEl = document.getElementById('velocity');
+            const sunkInfo = document.getElementById('sunkInfo');
+
+            let gameState = null;
+            let gameRunning = true;
+            let isDragging = false;
+            let dragStart = null;
+            let strokes = 0;
+
+        function getCanvasPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX || e.touches?.[0].clientX) - rect.left,
+                y: (e.clientY || e.touches?.[0].clientY) - rect.top
+            };
+        }
+
+        function isOnBall(pos, ball) {
+            const dx = pos.x - ball.position.x;
+            const dy = pos.y - ball.position.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            return dist < ball.radius * 3;
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (!gameState || !gameRunning) return;
+            const pos = getCanvasPos(e);
+            if (isOnBall(pos, gameState.ball)) {
+                isDragging = true;
+                dragStart = pos;
+            }
+        });
+
+        canvas.addEventListener('mouseup', async (e) => {
+            if (!isDragging || !dragStart) return;
+            isDragging = false;
+
+            const endPos = getCanvasPos(e);
+            const dx = dragStart.x - endPos.x;
+            const dy = dragStart.y - endPos.y;
+            const power = Math.min(Math.sqrt(dx * dx + dy * dy) / 100, 1.0);
+            const angle = Math.atan2(dy, dx);
+
+            if (power > 0.05) {
+                await invoke('strike_ball', { angle, power });
+                strokes++;
+                strokesEl.textContent = strokes;
+                gameRunning = false;
+                setTimeout(() => { gameRunning = true; }, 2000);
+            }
+            dragStart = null;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDragging = false;
+            dragStart = null;
+        });
+
+        resetBtn.addEventListener('click', async () => {
+            gameState = await invoke('reset_game');
+            gameRunning = true;
+            strokes = 0;
+            strokesEl.textContent = '0';
+            sunkInfo.innerHTML = '';
+        });
+
+        async function initGame() {
+            gameState = await invoke('init_game');
+            console.log('Game State:', gameState);
+        }
+
+        async function updateGame(dt) {
+            gameState = await invoke('update_game', { dt });
+
+            if (gameState.ball_sunk && gameRunning) {
+                gameRunning = false;
+                sunkInfo.innerHTML = `<div class="sunk-message">⭐ Hole in ${strokes}! ⭐</div>`;
+            }
+
+            const speed = Math.sqrt(gameState.ball.velocity.x ** 2 + gameState.ball.velocity.y ** 2);
+            velocityEl.textContent = speed.toFixed(1);
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Debug canvas boundary
+            ctx.strokeStyle = 'rgba(255,0,0,0.2)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameState) {
+                ctx.fillStyle = 'white';
+                ctx.font = '16px sans-serif';
+                ctx.fillText('Loading...', 20, 30);
+                return;
+            }
+
+            const layout = gameState.hole_layout;
+            const ball = gameState.ball;
+
+            // Draw walls
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            for (const wall of layout.walls) {
+                ctx.beginPath();
+                ctx.moveTo(wall.x1, wall.y1);
+                ctx.lineTo(wall.x2, wall.y2);
+                ctx.stroke();
+            }
+
+            // Draw holes
+            for (const hole of layout.holes) {
+                const size = hole.radius * 2;
+                ctx.fillStyle = 'rgba(40, 120, 50, 0.8)';
+                ctx.save();
+                ctx.translate(hole.x, hole.y);
+                ctx.rotate(45 * Math.PI / 180);
+                ctx.fillRect(-size / 2, -size / 2, size, size);
+                ctx.restore();
+
+                ctx.fillStyle = '#1a1a2e';
+                ctx.beginPath();
+                ctx.arc(hole.x, hole.y, hole.radius * 0.8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // Draw ball
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(200, 200, 200, 0.4)';
+            ctx.beginPath();
+            ctx.arc(ball.position.x - 3, ball.position.y - 3, ball.radius * 0.4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw drag line
+            if (isDragging && dragStart) {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(ball.position.x, ball.position.y);
+                ctx.lineTo(dragStart.x, dragStart.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+
+        let lastTime = Date.now();
+        async function gameLoop() {
+            const now = Date.now();
+            const dt = Math.min((now - lastTime) / 1000, 0.016);
+            lastTime = now;
+
+            if (gameRunning || isDragging) {
+                await updateGame(dt);
+            }
+            drawGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start game when ready
+        async function start() {
+            await initGame();
+            gameLoop();
+        }
+
+            // Start game when ready
+            async function start() {
+                await initGame();
+                gameLoop();
+            }
+
+            start();
+        }
+    </script>
+</body>
+</html>
+
