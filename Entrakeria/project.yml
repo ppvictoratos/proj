@@ -1,6 +1,6 @@
 name: Entrakeria
 options:
-  bundleIdPrefix: com.petrovicatos
+  bundleIdPrefix: com.portokali
   deploymentTarget:
     iOS: "17.0"
 
@@ -30,5 +30,5 @@ targets:
           - UIInterfaceOrientationPortrait
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.petrovicatos.Entrakeria
+        PRODUCT_BUNDLE_IDENTIFIER: com.portokali.Entrakeria
         TARGETED_DEVICE_FAMILY: "1"
