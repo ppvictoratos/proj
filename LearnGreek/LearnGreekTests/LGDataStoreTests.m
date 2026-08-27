@@ -62,6 +62,33 @@
     }
 }
 
+// Articles live in their own field so the UI can teach the noun first.
+- (void)testArticlesAreSplitFromNouns {
+    // "Τα" is deliberately absent: in "Τα λέμε" it's a pronoun, not an article.
+    NSSet<NSString *> *articles = [NSSet setWithArray:@[ @"Ο", @"Η", @"Το", @"Οι" ]];
+    NSUInteger articleCount = 0;
+    for (LGCategory *category in self.store.categories) {
+        for (LGWord *word in category.words) {
+            NSString *firstToken =
+                [word.greek componentsSeparatedByString:@" "].firstObject;
+            XCTAssertFalse([articles containsObject:firstToken],
+                           @"word %@ still leads with an article", word.greek);
+            if (word.article.length > 0) {
+                articleCount++;
+                XCTAssertTrue([articles containsObject:word.article]);
+                NSString *expected =
+                    [NSString stringWithFormat:@"%@ %@", word.article, word.greek];
+                XCTAssertEqualObjects(word.fullPhrase, expected);
+                XCTAssertEqualObjects(word.wordID, expected,
+                                      @"wordID must stay the full phrase for favorites compat");
+            } else {
+                XCTAssertEqualObjects(word.fullPhrase, word.greek);
+            }
+        }
+    }
+    XCTAssertGreaterThan(articleCount, 100u, @"most nouns should carry an article");
+}
+
 - (void)testEveryCategorySymbolResolvesToAnSFSymbol {
     for (LGCategory *category in self.store.categories) {
         XCTAssertNotNil([UIImage systemImageNamed:category.symbolName],
@@ -107,6 +134,46 @@
         [[LGDataStore alloc] initWithBundle:[NSBundle bundleForClass:[LGDataStore class]]
                                userDefaults:self.defaults];
     XCTAssertTrue([reloaded isFavorite:word]);
+}
+
+#pragma mark - Saved sentences
+
+- (void)testSavedSentencesStartEmpty {
+    XCTAssertEqual(self.store.savedSentences.count, 0u);
+}
+
+- (void)testSaveSentencePersistsAndDeduplicates {
+    [self.store saveSentence:@"Ο Δίας Η Αθηνά"];
+    XCTAssertEqualObjects(self.store.savedSentences, (@[ @"Ο Δίας Η Αθηνά" ]));
+
+    // Same sentence again, and a blank one, are both ignored.
+    [self.store saveSentence:@"Ο Δίας Η Αθηνά"];
+    [self.store saveSentence:@"   "];
+    XCTAssertEqual(self.store.savedSentences.count, 1u);
+
+    LGDataStore *reloaded =
+        [[LGDataStore alloc] initWithBundle:[NSBundle bundleForClass:[LGDataStore class]]
+                               userDefaults:self.defaults];
+    XCTAssertEqualObjects(reloaded.savedSentences, (@[ @"Ο Δίας Η Αθηνά" ]));
+}
+
+- (void)testSentencesKeepInsertionOrderAndDelete {
+    [self.store saveSentence:@"Καλημέρα"];
+    [self.store saveSentence:@"Καληνύχτα"];
+    XCTAssertEqualObjects(self.store.savedSentences, (@[ @"Καλημέρα", @"Καληνύχτα" ]));
+
+    [self.store deleteSentence:@"Καλημέρα"];
+    XCTAssertEqualObjects(self.store.savedSentences, (@[ @"Καληνύχτα" ]));
+
+    // Deleting something absent is a no-op.
+    [self.store deleteSentence:@"Καλημέρα"];
+    XCTAssertEqual(self.store.savedSentences.count, 1u);
+}
+
+- (void)testSaveSentencePostsNotification {
+    [self expectationForNotification:LGSentencesDidChangeNotification object:self.store handler:nil];
+    [self.store saveSentence:@"Ο ήλιος"];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
 - (void)testToggleFavoritePostsNotification {

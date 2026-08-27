@@ -25,14 +25,27 @@
     return self;
 }
 
-- (void)speakWord:(LGWord *)word {
+- (AVSpeechUtterance *)utteranceForText:(NSString *)text {
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:text];
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"el-GR"];
+    utterance.rate = 0.45;
+    return utterance;
+}
+
+- (void)stopSpeaking {
     if (self.synthesizer.isSpeaking) {
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:word.greek];
-    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"el-GR"];
-    utterance.rate = 0.45;
-    [self.synthesizer speakUtterance:utterance];
+}
+
+- (void)speakWord:(LGWord *)word {
+    [self stopSpeaking];
+    [self.synthesizer speakUtterance:[self utteranceForText:word.greek]];
+}
+
+- (void)speakText:(NSString *)text {
+    [self stopSpeaking];
+    [self.synthesizer speakUtterance:[self utteranceForText:text]];
 }
 
 @end
