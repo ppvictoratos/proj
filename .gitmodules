@@ -1,0 +1,3 @@
+[submodule "FORE4GLE-RUST"]
+	path = FORE4GLE-RUST
+	url = https://github.com/ppvictoratos/FORE4GLE-RUST.git
