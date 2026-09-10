@@ -30,3 +30,16 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.portokali.Entrakeia.Mac
         MACOSX_DEPLOYMENT_TARGET: "13.0"
+
+  EntrakeiaMacTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - ContentViewTests.swift
+    dependencies:
+      - target: EntrakeiaMac
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.portokali.Entrakeia.Mac.Tests
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
+        GENERATE_INFOPLIST_FILE: YES
