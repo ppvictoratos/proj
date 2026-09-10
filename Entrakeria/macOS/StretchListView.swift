@@ -68,6 +68,17 @@ struct StretchListView: View {
     }
 }
 
+extension View {
+    func borderBottom(height: CGFloat, color: Color) -> some View {
+        VStack {
+            self
+            Divider()
+                .frame(height: height)
+                .background(color)
+        }
+    }
+}
+
 #Preview {
-    StretchListView(activeView: .constant("stretch"))
+    StretchListView(activeView: .constant(nil))
 }

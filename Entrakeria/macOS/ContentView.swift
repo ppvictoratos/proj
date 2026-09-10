@@ -2,11 +2,17 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedDay: Int = 0
-    @State private var showExerciseList = false
+    @State private var activeView: String? = nil
 
     var body: some View {
-        if showExerciseList {
-            ExerciseListView(showExerciseList: $showExerciseList)
+        if activeView == "stretch" {
+            StretchListView(activeView: $activeView)
+        } else if activeView == "wim_hof" {
+            WimHofView(activeView: $activeView)
+        } else if activeView == "exercise" {
+            ExerciseListView(activeView: $activeView)
+        } else if activeView == "walk" {
+            WalkLogView(activeView: $activeView)
         } else {
             tetradView
         }
@@ -17,19 +23,16 @@ struct ContentView: View {
             EntrakeiaPalette.bg.ignoresSafeArea()
 
             VStack(spacing: 40) {
-                // Title
                 Text("ΕΝΤΡΑΚΕΡΙΑ")
                     .font(.system(size: 28, weight: .semibold, design: .default))
                     .tracking(4)
                     .foregroundStyle(EntrakeiaPalette.accent)
 
-                // Tetrad ribbon
                 Canvas { ctx, size in
                     let centerY = size.height / 2
                     let path = TetradGeometry.ribbonPath(days: 4, unit: 80, centerY: centerY)
                     ctx.stroke(path, with: .color(EntrakeiaPalette.line), lineWidth: 2)
 
-                    // Highlight current day
                     let current = TetradGeometry.vertices(forDay: selectedDay, unit: 80, centerY: centerY)
                     for p in current {
                         let dot = Path(ellipseIn: CGRect(x: p.x - 6, y: p.y - 6, width: 12, height: 12))
@@ -39,13 +42,11 @@ struct ContentView: View {
                 .frame(height: 140)
                 .padding(.horizontal, 40)
 
-                // Day label
                 Text("DAY \(selectedDay + 1) OF 4")
                     .font(.system(size: 13, weight: .medium, design: .default))
                     .tracking(2)
                     .foregroundStyle(EntrakeiaPalette.line)
 
-                // Four-corner exercise grid
                 ZStack {
                     Diamond()
                         .stroke(EntrakeiaPalette.line, lineWidth: 2)
@@ -53,19 +54,18 @@ struct ContentView: View {
 
                     VStack(spacing: 200) {
                         HStack(spacing: 200) {
-                            ExerciseButton(title: "STRETCH", isActive: true, action: { showExerciseList = true })
-                            ExerciseButton(title: "WIM HOF", isActive: false, action: { showExerciseList = true })
+                            ExerciseButton(title: "STRETCH", isActive: true, action: { activeView = "stretch" })
+                            ExerciseButton(title: "WIM HOF", isActive: false, action: { activeView = "wim_hof" })
                         }
                         HStack(spacing: 200) {
-                            ExerciseButton(title: "WALK", isActive: false, action: { showExerciseList = true })
-                            ExerciseButton(title: "EXERCISE", isActive: false, action: {})
+                            ExerciseButton(title: "WALK", isActive: false, action: { activeView = "walk" })
+                            ExerciseButton(title: "EXERCISE", isActive: false, action: { activeView = "exercise" })
                         }
                     }
                     .frame(width: 280, height: 280)
                 }
                 .padding(40)
 
-                // Navigation
                 HStack(spacing: 20) {
                     ForEach(0..<4, id: \.self) { day in
                         Button {

@@ -1,21 +1,9 @@
 import SwiftUI
 
 struct ExerciseListView: View {
-    @Binding var showExerciseList: Bool
+    @Binding var activeView: String?
 
     let exercises = [
-        ("Pelvic Tilts", "29 slow reps, flatback"),
-        ("Glute Bridges", "2x12, 2 sec squeeze"),
-        ("Ham Bridges", "2x12, 2 sec squeeze"),
-        ("Clamshells", "2x20 each side"),
-        ("Lateral Leg Lifts", "2x10"),
-        ("Child's Pose", "60 sec"),
-        ("Cat Cows", "3x10"),
-        ("Pigeon", "60 sec each side"),
-        ("90/90 Hip Stretch", "60 sec each side"),
-        ("Dead Bug", "3x8 each side"),
-        ("Curl Up L/R", "2x10 each"),
-        ("Bear Planks w/ KB Drag", ""),
         ("Lateral Step Down", ""),
         ("Arm Band Pull", ""),
         ("Goblet Squats", "29 reps, light"),
@@ -59,7 +47,7 @@ struct ExerciseListView: View {
 
             VStack(spacing: 0) {
                 HStack {
-                    Button(action: { showExerciseList = false }) {
+                    Button(action: { activeView = nil }) {
                         HStack(spacing: 6) {
                             Image(systemName: "chevron.left")
                             Text("Back")
@@ -67,16 +55,12 @@ struct ExerciseListView: View {
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(EntrakeiaPalette.blue)
                     }
-
                     Spacer()
-
                     Text("EXERCISES")
                         .font(.system(size: 18, weight: .semibold))
                         .tracking(3)
                         .foregroundStyle(EntrakeiaPalette.accent)
-
                     Spacer()
-
                     Color.clear.frame(width: 50)
                 }
                 .padding(20)
@@ -89,7 +73,6 @@ struct ExerciseListView: View {
                                 Text(name)
                                     .font(.system(size: 13, weight: .semibold))
                                     .foregroundStyle(EntrakeiaPalette.text)
-
                                 if !reps.isEmpty {
                                     Text(reps)
                                         .font(.system(size: 11, weight: .regular))
@@ -108,17 +91,7 @@ struct ExerciseListView: View {
     }
 }
 
-extension View {
-    func borderBottom(height: CGFloat, color: Color) -> some View {
-        VStack {
-            self
-            Divider()
-                .frame(height: height)
-                .background(color)
-        }
-    }
-}
 
 #Preview {
-    ExerciseListView(showExerciseList: .constant(true))
+    ExerciseListView(activeView: .constant(nil))
 }

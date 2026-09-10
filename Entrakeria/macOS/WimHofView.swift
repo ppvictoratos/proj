@@ -100,5 +100,5 @@ struct WimHofView: View {
 }
 
 #Preview {
-    WimHofView(activeView: .constant("wim_hof"))
+    WimHofView(activeView: .constant(nil))
 }

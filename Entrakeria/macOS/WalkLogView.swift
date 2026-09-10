@@ -79,5 +79,5 @@ struct WalkLogView: View {
 }
 
 #Preview {
-    WalkLogView(activeView: .constant("walk"))
+    WalkLogView(activeView: .constant(nil))
 }
