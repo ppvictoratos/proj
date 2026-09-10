@@ -2,8 +2,17 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedDay: Int = 0
+    @State private var showExerciseList = false
 
     var body: some View {
+        if showExerciseList {
+            ExerciseListView(showExerciseList: $showExerciseList)
+        } else {
+            tetradView
+        }
+    }
+
+    var tetradView: some View {
         ZStack {
             EntrakeiaPalette.bg.ignoresSafeArea()
 
@@ -12,7 +21,7 @@ struct ContentView: View {
                 Text("ΕΝΤΡΑΚΕΡΙΑ")
                     .font(.system(size: 28, weight: .semibold, design: .default))
                     .tracking(4)
-                    .foregroundStyle(EntrakeiaPalette.brown)
+                    .foregroundStyle(EntrakeiaPalette.accent)
 
                 // Tetrad ribbon
                 Canvas { ctx, size in
@@ -34,23 +43,22 @@ struct ContentView: View {
                 Text("DAY \(selectedDay + 1) OF 4")
                     .font(.system(size: 13, weight: .medium, design: .default))
                     .tracking(2)
-                    .foregroundStyle(EntrakeiaPalette.brown)
+                    .foregroundStyle(EntrakeiaPalette.line)
 
                 // Four-corner exercise grid
                 ZStack {
-                    // Diamond outline
                     Diamond()
                         .stroke(EntrakeiaPalette.line, lineWidth: 2)
                         .frame(width: 280, height: 280)
 
                     VStack(spacing: 200) {
                         HStack(spacing: 200) {
-                            ExerciseButton(title: "STRETCH", isActive: true)
-                            ExerciseButton(title: "WIM HOF", isActive: false)
+                            ExerciseButton(title: "STRETCH", isActive: true, action: { showExerciseList = true })
+                            ExerciseButton(title: "WIM HOF", isActive: false, action: { showExerciseList = true })
                         }
                         HStack(spacing: 200) {
-                            ExerciseButton(title: "WALK", isActive: false)
-                            ExerciseButton(title: "EXERCISE", isActive: false)
+                            ExerciseButton(title: "WALK", isActive: false, action: { showExerciseList = true })
+                            ExerciseButton(title: "EXERCISE", isActive: false, action: { showExerciseList = true })
                         }
                     }
                     .frame(width: 280, height: 280)
@@ -67,9 +75,9 @@ struct ContentView: View {
                         } label: {
                             Text("D\(day + 1)")
                                 .font(.system(size: 12, weight: .semibold, design: .default))
-                                .foregroundStyle(selectedDay == day ? .white : EntrakeiaPalette.brown)
+                                .foregroundStyle(selectedDay == day ? EntrakeiaPalette.bg : EntrakeiaPalette.text)
                                 .frame(width: 50, height: 40)
-                                .background(selectedDay == day ? EntrakeiaPalette.brown : EntrakeiaPalette.bg.opacity(0.5))
+                                .background(selectedDay == day ? EntrakeiaPalette.blue : EntrakeiaPalette.card)
                                 .cornerRadius(6)
                         }
                     }
@@ -87,23 +95,27 @@ struct ContentView: View {
 struct ExerciseButton: View {
     let title: String
     let isActive: Bool
+    let action: () -> Void
 
     var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "figure.strengthtraining")
-                .font(.system(size: 32, weight: .light))
-                .foregroundStyle(isActive ? EntrakeiaPalette.blue : EntrakeiaPalette.line.opacity(0.3))
+        Button(action: action) {
+            VStack(spacing: 8) {
+                Image(systemName: "figure.strengthtraining")
+                    .font(.system(size: 32, weight: .light))
+                    .foregroundStyle(isActive ? EntrakeiaPalette.blue : EntrakeiaPalette.line)
 
-            Text(title)
-                .font(.system(size: 11, weight: .semibold, design: .default))
-                .tracking(1)
-                .foregroundStyle(isActive ? EntrakeiaPalette.blue : EntrakeiaPalette.line.opacity(0.3))
+                Text(title)
+                    .font(.system(size: 11, weight: .semibold, design: .default))
+                    .tracking(1)
+                    .foregroundStyle(isActive ? EntrakeiaPalette.text : EntrakeiaPalette.line)
+            }
+            .frame(width: 70, height: 70)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isActive ? EntrakeiaPalette.blue : EntrakeiaPalette.line, lineWidth: 1.5)
+            )
         }
-        .frame(width: 70, height: 70)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(isActive ? EntrakeiaPalette.blue : EntrakeiaPalette.line.opacity(0.2), lineWidth: 1.5)
-        )
+        .buttonStyle(.plain)
     }
 }
 

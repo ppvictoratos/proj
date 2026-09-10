@@ -16,6 +16,7 @@ targets:
       - Colors.swift
       - TetradGeometry.swift
       - ContentView.swift
+      - ExerciseListView.swift
       - EntrakeiaMacApp.swift
     info:
       path: Info.plist
