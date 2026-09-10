@@ -45,7 +45,12 @@ struct ExerciseListView: View {
         ("Pull-Ups Chest-to-Bar (Day 4)", "3x8-12"),
         ("Barbell Back Squats (Day 4)", "3x10"),
         ("Dumbbell Incline Press (Day 4)", "3x10"),
-        ("Landmine Core Twists (Day 4)", "3x12 per side")
+        ("Landmine Core Twists (Day 4)", "3x12 per side"),
+        ("Dumbbell Skull Crushers", "20"),
+        ("Overhead Triceps Extension", ""),
+        ("Standing Dumbbell Curls", ""),
+        ("Hammer Curls", ""),
+        ("Wrist Curls", "")
     ]
 
     var body: some View {
@@ -99,7 +104,7 @@ struct ExerciseListView: View {
                 }
             }
         }
-        .frame(minWidth: 800, minHeight: 600)
+        .frame(minWidth: 800, minHeight: 1000)
     }
 }
 

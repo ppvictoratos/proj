@@ -58,7 +58,7 @@ struct ContentView: View {
                         }
                         HStack(spacing: 200) {
                             ExerciseButton(title: "WALK", isActive: false, action: { showExerciseList = true })
-                            ExerciseButton(title: "EXERCISE", isActive: false, action: { showExerciseList = true })
+                            ExerciseButton(title: "EXERCISE", isActive: false, action: {})
                         }
                     }
                     .frame(width: 280, height: 280)
@@ -88,7 +88,7 @@ struct ContentView: View {
             }
             .padding(40)
         }
-        .frame(minWidth: 800, minHeight: 600)
+        .frame(minWidth: 800, minHeight: 1000)
     }
 }
 
