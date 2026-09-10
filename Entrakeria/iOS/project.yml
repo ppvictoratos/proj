@@ -14,11 +14,9 @@ targets:
     platform: iOS
     deploymentTarget: "17.0"
     sources:
-      - Colors.swift
-      - TetradGeometry.swift
-      - Models.swift
-      - ContentView.swift
-      - EntrekeriaApp.swift
+      - path: .
+        excludes:
+          - project.yml
     info:
       path: Info.plist
       properties:

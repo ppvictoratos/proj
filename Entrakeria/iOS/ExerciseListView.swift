@@ -45,3 +45,4 @@ struct ExerciseListView: View {
 #Preview {
     ExerciseListView(activeView: .constant(nil))
 }
+
