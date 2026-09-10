@@ -1,0 +1,28 @@
+name: Entrakeia
+options:
+  deploymentTarget:
+    macOS: "13.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+
+targets:
+  EntrakeiaMac:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - Colors.swift
+      - TetradGeometry.swift
+      - ContentView.swift
+      - EntrakeiaMacApp.swift
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: Entrakeia
+        CFBundlePackageType: APPL
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.portokali.Entrakeia.Mac
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
